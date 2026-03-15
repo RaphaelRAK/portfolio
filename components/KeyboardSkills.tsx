@@ -19,6 +19,9 @@ import {
   SiScaleway,
   SiN8N,
   SiRedux,
+  SiReactquery,
+  SiFigma,
+  SiStorybook,
 } from "react-icons/si";
 import { Globe, Server, Cpu, Mic } from "lucide-react";
 import type { IconType } from "react-icons";
@@ -27,174 +30,122 @@ import type { MouseEvent } from "react";
 
 type AnyIcon = IconType | LucideIcon;
 
-interface Skill {
-  name: string;
-  Icon?: AnyIcon;
-  iconColor?: string;
-}
+// ─── Skill registry ───────────────────────────────────────────────────────────
+const skillMap: Record<string, { Icon: AnyIcon; color: string }> = {
+  "React Native":    { Icon: SiReact,          color: "#61dafb" },
+  "Next.js":         { Icon: SiNextdotjs,       color: "#111111" },
+  "React":           { Icon: SiReact,           color: "#61dafb" },
+  "TypeScript":      { Icon: SiTypescript,      color: "#3178c6" },
+  "Tailwind CSS":    { Icon: SiTailwindcss,     color: "#38bdf8" },
+  "Redux Toolkit":   { Icon: SiRedux,           color: "#764abc" },
+  "React Query":     { Icon: SiReactquery,      color: "#ff4154" },
+  "NestJS":          { Icon: SiNestjs,          color: "#e0234e" },
+  "REST":            { Icon: Globe,             color: "#6366f1" },
+  "PostgreSQL":      { Icon: SiPostgresql,      color: "#4169e1" },
+  "Supabase":        { Icon: SiSupabase,        color: "#3ecf8e" },
+  "Docker":          { Icon: SiDocker,          color: "#2496ed" },
+  "Docker Compose":  { Icon: SiDocker,          color: "#2496ed" },
+  "Nginx":           { Icon: SiNginx,           color: "#009900" },
+  "Scaleway":        { Icon: SiScaleway,        color: "#7f3fbf" },
+  "GitHub Actions":  { Icon: SiGithubactions,   color: "#2088ff" },
+  "Serveur dédié":   { Icon: Server,            color: "#64748b" },
+  "Stripe":          { Icon: SiStripe,          color: "#635bff" },
+  "Firebase / FCM":  { Icon: SiFirebase,        color: "#ff9800" },
+  "Mailjet":         { Icon: Cpu,               color: "#21a7e0" },
+  "n8n":             { Icon: SiN8N,             color: "#ef6a00" },
+  "ElevenLabs":      { Icon: Mic,               color: "#111111" },
+  "Figma":           { Icon: SiFigma,           color: "#f24e1e" },
+  "Storybook":       { Icon: SiStorybook,       color: "#ff4785" },
+  "JavaScript":      { Icon: SiJavascript,      color: "#f7df1e" },
+  "Python":          { Icon: SiPython,          color: "#3776ab" },
+  "Java":            { Icon: Cpu,               color: "#f89820" },
+  "C":               { Icon: Cpu,               color: "#a8b9cc" },
+};
 
-interface Group {
-  label: string;
-  bg: string;
-  border: string;
-  shadow: string;
-  labelColor: string;
-  skills: Skill[];
-}
-
-const groups: Group[] = [
-  {
-    label: "Mobile & Web",
-    bg: "#f5f7ff",
-    border: "#c7d2fe",
-    shadow: "#a5b4fc",
-    labelColor: "#4f46e5",
-    skills: [
-      { name: "React Native", Icon: SiReact, iconColor: "#61dafb" },
-      { name: "Next.js", Icon: SiNextdotjs, iconColor: "#111" },
-      { name: "React", Icon: SiReact, iconColor: "#61dafb" },
-      { name: "TypeScript", Icon: SiTypescript, iconColor: "#3178c6" },
-      { name: "Tailwind CSS", Icon: SiTailwindcss, iconColor: "#38bdf8" },
-      { name: "Redux Toolkit", Icon: SiRedux, iconColor: "#764abc" },
-    ],
-  },
-  {
-    label: "Backend",
-    bg: "#f8f5ff",
-    border: "#ddd6fe",
-    shadow: "#c4b5fd",
-    labelColor: "#7c3aed",
-    skills: [
-      { name: "NestJS", Icon: SiNestjs, iconColor: "#e0234e" },
-      { name: "REST", Icon: Globe, iconColor: "#6366f1" },
-      { name: "PostgreSQL", Icon: SiPostgresql, iconColor: "#4169e1" },
-      { name: "Supabase", Icon: SiSupabase, iconColor: "#3ecf8e" },
-    ],
-  },
-  {
-    label: "Infrastructure & DevOps",
-    bg: "#f0fdf8",
-    border: "#a7f3d0",
-    shadow: "#6ee7b7",
-    labelColor: "#059669",
-    skills: [
-      { name: "Docker", Icon: SiDocker, iconColor: "#2496ed" },
-      { name: "Docker Compose", Icon: SiDocker, iconColor: "#2496ed" },
-      { name: "Nginx", Icon: SiNginx, iconColor: "#009900" },
-      { name: "Scaleway", Icon: SiScaleway, iconColor: "#7f3fbf" },
-      { name: "GitHub Actions", Icon: SiGithubactions, iconColor: "#2088ff" },
-      { name: "Serveur dédié", Icon: Server, iconColor: "#64748b" },
-    ],
-  },
-  {
-    label: "Outils tiers",
-    bg: "#fffdf0",
-    border: "#fde68a",
-    shadow: "#fbbf24",
-    labelColor: "#d97706",
-    skills: [
-      { name: "Stripe", Icon: SiStripe, iconColor: "#635bff" },
-      { name: "Firebase / FCM", Icon: SiFirebase, iconColor: "#ff9800" },
-      { name: "Mailjet", Icon: Cpu, iconColor: "#21a7e0" },
-      { name: "n8n", Icon: SiN8N, iconColor: "#ef6a00" },
-      { name: "ElevenLabs", Icon: Mic, iconColor: "#111" },
-    ],
-  },
-  {
-    label: "Langages",
-    bg: "#fafafa",
-    border: "#e4e4e7",
-    shadow: "#d4d4d8",
-    labelColor: "#52525b",
-    skills: [
-      { name: "JavaScript", Icon: SiJavascript, iconColor: "#f7df1e" },
-      { name: "TypeScript", Icon: SiTypescript, iconColor: "#3178c6" },
-      { name: "Python", Icon: SiPython, iconColor: "#3776ab" },
-      { name: "Java", Icon: Cpu, iconColor: "#f89820" },
-      { name: "C", Icon: Cpu, iconColor: "#a8b9cc" },
-    ],
-  },
+// Rows with QWERTY-style left offset (px)
+const rows = [
+  { names: ["React Native", "Next.js", "React", "TypeScript", "Tailwind CSS", "Redux Toolkit", "React Query"], offset: 0  },
+  { names: ["NestJS", "REST", "PostgreSQL", "Supabase", "Docker", "Docker Compose"],                            offset: 18 },
+  { names: ["Nginx", "Scaleway", "GitHub Actions", "Serveur dédié", "Stripe", "Firebase / FCM"],                offset: 36 },
+  { names: ["Mailjet", "n8n", "ElevenLabs", "Figma", "Storybook"],                                              offset: 24 },
+  { names: ["JavaScript", "Python", "Java", "C"],                                                               offset: 10 },
 ];
 
+// Box-shadow constants
+const S_UP =
+  "0 0 0 1.5px #c0c0c0, 0 5px 0 0 #a8a8a8, 0 8px 20px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.95)";
+const S_DOWN =
+  "0 0 0 1.5px #c0c0c0, 0 1px 0 0 #a8a8a8, 0 2px 6px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.6)";
+
+// ─── Single key ───────────────────────────────────────────────────────────────
 function Key({
   name,
   Icon,
-  iconColor,
-  bg,
-  border,
-  shadow,
+  color,
   index,
-}: Skill & { bg: string; border: string; shadow: string; index: number }) {
-  function handleEnter(e: MouseEvent<HTMLSpanElement>) {
-    const el = e.currentTarget;
-    el.style.transform = "translateY(4px)";
-    el.style.boxShadow = `0 0px 0 0 ${shadow}`;
+}: {
+  name: string;
+  Icon: AnyIcon;
+  color: string;
+  index: number;
+}) {
+  function press(e: MouseEvent<HTMLDivElement>) {
+    e.currentTarget.style.transform = "translateY(4px)";
+    e.currentTarget.style.boxShadow = S_DOWN;
   }
-  function handleLeave(e: MouseEvent<HTMLSpanElement>) {
-    const el = e.currentTarget;
-    el.style.transform = "translateY(0px)";
-    el.style.boxShadow = `0 4px 0 0 ${shadow}`;
+  function release(e: MouseEvent<HTMLDivElement>) {
+    e.currentTarget.style.transform = "translateY(0px)";
+    e.currentTarget.style.boxShadow = S_UP;
   }
 
   return (
-    <motion.span
-      initial={{ opacity: 0, y: 12, scale: 0.88 }}
+    <motion.div
+      initial={{ opacity: 0, y: 18, scale: 0.82 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1], delay: index * 0.035 }}
-      className="inline-flex flex-col items-center justify-center gap-1.5 px-4 py-3 min-w-[72px] rounded-xl cursor-default select-none"
+      transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1], delay: index * 0.028 }}
+      className="w-[100px] h-[100px] shrink-0 flex flex-col items-center justify-center gap-1.5 rounded-[16px] cursor-default select-none"
       style={{
-        background: bg,
-        border: `1.5px solid ${border}`,
-        boxShadow: `0 4px 0 0 ${shadow}`,
+        background: "linear-gradient(180deg,#ffffff 0%,#f2f2f2 100%)",
+        boxShadow: S_UP,
         transition: "transform 80ms ease, box-shadow 80ms ease",
       }}
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
+      onMouseEnter={press}
+      onMouseLeave={release}
     >
-      {Icon && (
-        <Icon
-          className="w-5 h-5 shrink-0"
-          style={{ color: iconColor ?? "#52525b" }}
-        />
-      )}
-      <span className="text-xs font-semibold text-zinc-700 whitespace-nowrap leading-none">
+      <Icon style={{ color, width: 36, height: 36, fontSize: 36 }} />
+      <span className="text-[10.5px] font-semibold text-zinc-700 text-center leading-tight px-2 max-w-full">
         {name}
       </span>
-    </motion.span>
+    </motion.div>
   );
 }
 
+// ─── Keyboard layout ──────────────────────────────────────────────────────────
 export function KeyboardSkills() {
-  let globalIdx = 0;
+  let idx = 0;
 
   return (
-    <div className="space-y-10">
-      {groups.map((g) => (
-        <div key={g.label}>
-          <p
-            className="text-xs font-bold tracking-widest uppercase mb-5"
-            style={{ color: g.labelColor }}
-          >
-            {g.label}
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {g.skills.map((s) => {
-              const idx = globalIdx++;
-              return (
-                <Key
-                  key={s.name}
-                  {...s}
-                  bg={g.bg}
-                  border={g.border}
-                  shadow={g.shadow}
-                  index={idx}
-                />
-              );
+    <div
+      className="rounded-2xl p-6 pb-12 overflow-x-auto"
+      style={{
+        background: "linear-gradient(175deg, #e4e4e4 0%, #cccccc 100%)",
+        boxShadow:
+          "0 24px 60px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -3px 0 rgba(0,0,0,0.14)",
+      }}
+    >
+      <div className="space-y-[10px] min-w-max">
+        {rows.map((row, ri) => (
+          <div key={ri} className="flex gap-[10px]" style={{ marginLeft: row.offset }}>
+            {row.names.map((name) => {
+              const skill = skillMap[name];
+              if (!skill) return null;
+              const i = idx++;
+              return <Key key={name} name={name} Icon={skill.Icon} color={skill.color} index={i} />;
             })}
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

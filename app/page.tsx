@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { StoreButtons } from "@/components/StoreButtons";
 import { KeyboardSkills } from "@/components/KeyboardSkills";
+import { BrowserPreview } from "@/components/BrowserPreview";
 
 // ─── Animation helpers ────────────────────────────────────────────────────────
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -100,45 +101,6 @@ const prevXp = [
 ];
 
 // ─── Phone Mockup ─────────────────────────────────────────────────────────────
-function PhoneMockup() {
-  return (
-    <motion.div
-      {...scroll(0.3)}
-      className="hidden lg:flex items-center justify-center"
-    >
-      <div className="relative flex flex-col" style={{ width: 200, height: 400 }}>
-        <div className="absolute inset-0 rounded-[44px] border-2 border-zinc-700 bg-zinc-900 overflow-hidden shadow-2xl shadow-black/60">
-          <div className="h-10 flex items-center justify-between px-5 pt-2">
-            <span className="text-[10px] text-zinc-400">9:41</span>
-            <div className="w-24 h-5 bg-zinc-800 rounded-full" />
-            <div className="flex gap-1">
-              <span className="w-3 h-2 bg-zinc-500 rounded-sm" />
-            </div>
-          </div>
-          <div className="flex flex-col items-center px-4 pt-4 gap-3">
-            <div className="w-14 h-14 rounded-2xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-900/50">
-              <span className="text-white text-xl font-bold tracking-tighter">P</span>
-            </div>
-            <p className="text-white text-xs font-semibold">Plüm Service</p>
-            <div className="w-full space-y-2 mt-2">
-              <div className="h-2 bg-zinc-800 rounded-full w-3/4 mx-auto" />
-              <div className="h-2 bg-zinc-800 rounded-full w-1/2 mx-auto" />
-            </div>
-            <div className="grid grid-cols-2 gap-2 w-full mt-2">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-16 bg-zinc-800 rounded-xl border border-zinc-700/50" />
-              ))}
-            </div>
-            <div className="w-full h-20 bg-zinc-800 rounded-xl border border-zinc-700/50 mt-1" />
-          </div>
-        </div>
-        <div className="absolute top-3 left-1/2 -translate-x-1/2 w-20 h-5 bg-zinc-900 rounded-full z-10 border border-zinc-700" />
-        <div className="absolute -right-1 top-24 w-1 h-12 bg-zinc-700 rounded-full" />
-        <div className="absolute -left-1 top-20 w-1 h-8 bg-zinc-700 rounded-full" />
-      </div>
-    </motion.div>
-  );
-}
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function Home() {
@@ -201,7 +163,7 @@ export default function Home() {
             {...up(0.45)}
             className="text-base text-zinc-500 max-w-lg leading-relaxed mb-12"
           >
-            Développeur fullstack basé à La Réunion. Je construis des applications mobiles et
+            Développeur fullstack basé à La Réunion chez <span className="text-zinc-700 font-medium">plüm</span>. Je construis des applications mobiles et
             web de bout en bout — de l&apos;architecture backend aux interfaces utilisateurs.
           </motion.p>
 
@@ -229,7 +191,7 @@ export default function Home() {
             { value: "4×", label: "Mention Bien", sub: "Bac · Licence · Master 2 · CNFDI" },
             { value: "5 ans", label: "en double vie", sub: "études + emploi en parallèle" },
             { value: "10+", label: "technos en prod", sub: "React Native, NestJS, Supabase…" },
-            { value: "CDI", label: "Fullstack depuis 2025", sub: "Plüm Service" },
+            { value: "CDI", label: "Fullstack depuis 2025", sub: "plüm · La Réunion" },
           ].map((s, i) => (
             <motion.div key={s.value} {...scroll(i * 0.1)}>
               <p className="text-4xl sm:text-5xl font-bold text-indigo-400 leading-none mb-1">{s.value}</p>
@@ -334,7 +296,7 @@ export default function Home() {
               </motion.div>
 
               <motion.h2 {...scroll(0.08)} className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-2">
-                Plüm Service
+                Plüm Services
               </motion.h2>
               <motion.span
                 {...fade(0.15)}
@@ -355,19 +317,19 @@ export default function Home() {
                 {[
                   {
                     cat: "Application mobile",
-                    detail: "React Native · navigation complexe, notifications push (FCM / OneSignal), paiement Stripe, auth JWT / Magic Link, A/B testing",
+                    detail: "React Native · React Navigation, notifications push FCM, paiement Stripe, auth JWT / Magic Link, Redux Toolkit, React Query",
                   },
                   {
                     cat: "Site web & Back-office",
-                    detail: "Next.js SSR/SSG · interface gestionnaires, tableaux de bord temps réel, Supabase Realtime",
+                    detail: "Next.js SSR/SSG · interface gestionnaires, tableaux de bord temps réel, Supabase Realtime, intégrations Figma pixel-perfect",
                   },
                   {
-                    cat: "API & Base de données",
-                    detail: "NestJS · REST, PostgreSQL optimisé, Supabase Auth & Serverless, Docker, Nginx, Scaleway",
+                    cat: "API & Infrastructure",
+                    detail: "NestJS · REST, PostgreSQL, Supabase Auth & Serverless, Docker, Docker Compose, Nginx, Scaleway",
                   },
                   {
-                    cat: "Qualité & delivery",
-                    detail: "Couverture > 80 % (Jest, Cypress, Detox) · Storybook, OpenAPI/Swagger, ADR, GitHub Actions",
+                    cat: "CI/CD & documentation",
+                    detail: "GitHub Actions · pipeline CI/CD, migrations Supabase, Storybook, OpenAPI/Swagger, ADR, Mermaid.js",
                   },
                 ].map((item, i) => (
                   <motion.div
@@ -382,7 +344,7 @@ export default function Home() {
               </div>
 
               <motion.div {...fade(0.3)} className="flex flex-wrap gap-2 mb-2">
-                {["React Native", "Next.js", "NestJS", "TypeScript", "Supabase", "PostgreSQL", "Docker", "Nginx", "Stripe", "Redux Toolkit"].map((tag) => (
+                {["React Native", "Next.js", "NestJS", "TypeScript", "Supabase", "PostgreSQL", "Docker", "Nginx", "Scaleway", "Stripe", "Redux Toolkit", "React Query"].map((tag) => (
                   <span key={tag} className="text-xs px-3 py-1.5 bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 rounded-full">
                     {tag}
                   </span>
@@ -392,7 +354,10 @@ export default function Home() {
               <StoreButtons />
             </div>
 
-            <PhoneMockup />
+            <BrowserPreview
+              url="https://www.plumservices.co/"
+              displayUrl="plumservices.co"
+            />
           </div>
         </div>
       </section>

@@ -13,9 +13,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: "Aina Raphaël Rakotonaivo — Développeur Fullstack",
   description:
-    "Développeur fullstack basé à La Réunion, spécialisé dans la conception d'applications web et mobiles avec React, React Native, Next.js et NestJS.",
+    "J'ai travaillé en cuisine et en caisse pendant que j'apprenais à coder. Mention Bien à chaque diplôme. Développeur Fullstack · React Native & Next.js / NestJS.",
+  openGraph: {
+    title: "Aina Raphaël Rakotonaivo — Développeur Fullstack",
+    description:
+      "J'ai travaillé en cuisine et en caisse pendant que j'apprenais à coder. Mention Bien à chaque diplôme.",
+    siteName: "Portfolio — Aina Raphaël Rakotonaivo",
+    images: [{ url: "/raph.jpeg", width: 800, height: 800, alt: "Aina Raphaël Rakotonaivo" }],
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aina Raphaël Rakotonaivo — Développeur Fullstack",
+    description:
+      "J'ai travaillé en cuisine et en caisse pendant que j'apprenais à coder. Mention Bien à chaque diplôme.",
+    images: ["/raph.jpeg"],
+  },
 };
 
 export default function RootLayout({
@@ -24,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

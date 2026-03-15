@@ -49,7 +49,7 @@ const T = {
     hero: {
       status: "En poste · La Réunion",
       title: "Développeur Fullstack",
-      spec: "React Native & Next.js / NestJS",
+      spec: "",
       story: "J'ai travaillé en cuisine et en caisse pendant que j'apprenais à coder.",
       story2: "Mention Bien à chaque diplôme.",
       cta: "Mon parcours",
@@ -97,8 +97,9 @@ const T = {
     contact: {
       eyebrow: "Contact",
       heading: "On discute ?",
-      desc: "Disponible pour des échanges sur des projets ambitieux, des opportunités en CDI ou en freelance. Je réponds vite.",
+      desc: "Ouvert à des projets bénévoles si c'est formateur et stimulant, un CDI, ou un CDD — à La Réunion comme en métropole. Et si tu passes juste pour dire bonjour, c'est bon aussi. ☕",
       open: "Ouvert aux opportunités",
+      cta: "M'envoyer un message",
     },
     footer: "La Réunion",
   },
@@ -107,7 +108,7 @@ const T = {
     hero: {
       status: "Employed · Réunion Island",
       title: "Fullstack Developer",
-      spec: "React Native & Next.js / NestJS",
+      spec: "",
       story: "I worked in kitchens and at cash registers while learning to code.",
       story2: "Honours at every degree.",
       cta: "My journey",
@@ -155,8 +156,9 @@ const T = {
     contact: {
       eyebrow: "Contact",
       heading: "Let's talk?",
-      desc: "Available to discuss ambitious projects, permanent or freelance opportunities. I reply fast.",
+      desc: "Open to volunteer projects if they're meaningful and help me grow, a permanent role, or a fixed-term contract — in Réunion Island or mainland France. Or just drop by to say hi. ☕",
       open: "Open to opportunities",
+      cta: "Send me a message",
     },
     footer: "Réunion Island",
   },
@@ -679,11 +681,7 @@ export default function Home() {
           <motion.div {...scroll(0.2)} className="flex flex-col sm:flex-row gap-4 mb-10">
             <a href="mailto:raphael.rakotonaivo@gmail.com"
               className="inline-flex items-center justify-center gap-2 text-sm font-semibold bg-indigo-600 text-white px-7 py-3.5 rounded-full hover:bg-indigo-700 transition-colors shadow-md shadow-indigo-200 dark:shadow-indigo-900/30">
-              raphael.rakotonaivo@gmail.com
-            </a>
-            <a href="tel:0692828074"
-              className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-zinc-700 dark:text-zinc-300 border border-zinc-300 dark:border-zinc-600 px-7 py-3.5 rounded-full hover:border-zinc-600 dark:hover:border-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
-              +262 6 92 82 80 74
+              {t.contact.cta} →
             </a>
           </motion.div>
           <motion.div {...fade(0.3)} className="flex items-center gap-5">

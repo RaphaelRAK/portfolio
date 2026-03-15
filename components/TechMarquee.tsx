@@ -59,7 +59,7 @@ const track = [...items, ...items];
 
 export function TechMarquee() {
   return (
-    <div className="overflow-hidden py-10 border-y border-zinc-100 bg-white select-none">
+    <div className="overflow-hidden py-10 border-y border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-950 select-none transition-colors duration-300">
       <motion.div
         className="flex gap-14 w-max"
         animate={{ x: ["0%", "-50%"] }}
@@ -70,7 +70,7 @@ export function TechMarquee() {
             <item.Icon
               style={{ color: item.color, width: 26, height: 26, fontSize: 26 }}
             />
-            <span className="text-base font-semibold text-zinc-600 whitespace-nowrap">
+            <span className="text-base font-semibold text-zinc-600 dark:text-zinc-400 whitespace-nowrap">
               {item.name}
             </span>
           </div>

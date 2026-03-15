@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   SiReact,
@@ -71,11 +72,11 @@ const rows = [
   { names: ["JavaScript", "Python", "Java", "C"],                                                               offset: 10 },
 ];
 
-// Box-shadow constants
-const S_UP =
-  "0 0 0 1.5px #c0c0c0, 0 5px 0 0 #a8a8a8, 0 8px 20px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.95)";
-const S_DOWN =
-  "0 0 0 1.5px #c0c0c0, 0 1px 0 0 #a8a8a8, 0 2px 6px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.6)";
+// Box-shadow constants — light / dark
+const S_UP_LIGHT   = "0 0 0 1.5px #c0c0c0, 0 5px 0 0 #a8a8a8, 0 8px 20px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.95)";
+const S_DOWN_LIGHT = "0 0 0 1.5px #c0c0c0, 0 1px 0 0 #a8a8a8, 0 2px 6px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.6)";
+const S_UP_DARK    = "0 0 0 1.5px #3f3f46, 0 5px 0 0 #27272a, 0 8px 20px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06)";
+const S_DOWN_DARK  = "0 0 0 1.5px #3f3f46, 0 1px 0 0 #27272a, 0 2px 6px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.04)";
 
 // ─── Single key ───────────────────────────────────────────────────────────────
 function Key({
@@ -83,12 +84,17 @@ function Key({
   Icon,
   color,
   index,
+  isDark,
 }: {
   name: string;
   Icon: AnyIcon;
   color: string;
   index: number;
+  isDark: boolean;
 }) {
+  const S_UP   = isDark ? S_UP_DARK   : S_UP_LIGHT;
+  const S_DOWN = isDark ? S_DOWN_DARK : S_DOWN_LIGHT;
+
   function press(e: MouseEvent<HTMLDivElement>) {
     e.currentTarget.style.transform = "translateY(4px)";
     e.currentTarget.style.boxShadow = S_DOWN;
@@ -106,7 +112,9 @@ function Key({
       transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1], delay: index * 0.028 }}
       className="w-[100px] h-[100px] shrink-0 flex flex-col items-center justify-center gap-1.5 rounded-[16px] cursor-default select-none"
       style={{
-        background: "linear-gradient(180deg,#ffffff 0%,#f2f2f2 100%)",
+        background: isDark
+          ? "linear-gradient(180deg,#3f3f46 0%,#27272a 100%)"
+          : "linear-gradient(180deg,#ffffff 0%,#f2f2f2 100%)",
         boxShadow: S_UP,
         transition: "transform 80ms ease, box-shadow 80ms ease",
       }}
@@ -114,7 +122,7 @@ function Key({
       onMouseLeave={release}
     >
       <Icon style={{ color, width: 36, height: 36, fontSize: 36 }} />
-      <span className="text-[10.5px] font-semibold text-zinc-700 text-center leading-tight px-2 max-w-full">
+      <span className={`text-[10.5px] font-semibold text-center leading-tight px-2 max-w-full ${isDark ? "text-zinc-300" : "text-zinc-700"}`}>
         {name}
       </span>
     </motion.div>
@@ -123,15 +131,28 @@ function Key({
 
 // ─── Keyboard layout ──────────────────────────────────────────────────────────
 export function KeyboardSkills() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const update = () => setIsDark(document.documentElement.classList.contains("dark"));
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+
   let idx = 0;
 
   return (
     <div
-      className="rounded-2xl p-6 pb-12 overflow-x-auto"
+      className="rounded-2xl p-6 pb-12 overflow-x-auto transition-colors duration-300"
       style={{
-        background: "linear-gradient(175deg, #e4e4e4 0%, #cccccc 100%)",
-        boxShadow:
-          "0 24px 60px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -3px 0 rgba(0,0,0,0.14)",
+        background: isDark
+          ? "linear-gradient(175deg, #27272a 0%, #18181b 100%)"
+          : "linear-gradient(175deg, #e4e4e4 0%, #cccccc 100%)",
+        boxShadow: isDark
+          ? "0 24px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05), inset 0 -3px 0 rgba(0,0,0,0.4)"
+          : "0 24px 60px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -3px 0 rgba(0,0,0,0.14)",
       }}
     >
       <div className="space-y-[10px] min-w-max">
@@ -141,7 +162,7 @@ export function KeyboardSkills() {
               const skill = skillMap[name];
               if (!skill) return null;
               const i = idx++;
-              return <Key key={name} name={name} Icon={skill.Icon} color={skill.color} index={i} />;
+              return <Key key={name} name={name} Icon={skill.Icon} color={skill.color} index={i} isDark={isDark} />;
             })}
           </div>
         ))}

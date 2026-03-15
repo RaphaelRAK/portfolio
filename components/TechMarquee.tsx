@@ -59,18 +59,18 @@ const track = [...items, ...items];
 
 export function TechMarquee() {
   return (
-    <div className="overflow-hidden py-6 border-y border-zinc-100 bg-white select-none">
+    <div className="overflow-hidden py-10 border-y border-zinc-100 bg-white select-none">
       <motion.div
-        className="flex gap-10 w-max"
+        className="flex gap-14 w-max"
         animate={{ x: ["0%", "-50%"] }}
         transition={{ duration: 40, ease: "linear", repeat: Infinity }}
       >
         {track.map((item, i) => (
-          <div key={i} className="flex items-center gap-2 shrink-0">
+          <div key={i} className="flex items-center gap-3 shrink-0">
             <item.Icon
-              style={{ color: item.color, width: 18, height: 18, fontSize: 18 }}
+              style={{ color: item.color, width: 26, height: 26, fontSize: 26 }}
             />
-            <span className="text-sm font-medium text-zinc-600 whitespace-nowrap">
+            <span className="text-base font-semibold text-zinc-600 whitespace-nowrap">
               {item.name}
             </span>
           </div>

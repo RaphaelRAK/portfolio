@@ -90,6 +90,10 @@ const T = {
       desc: "Disponible pour des échanges sur des projets ambitieux, des opportunités en CDI ou en freelance. Je réponds vite.",
       open: "Ouvert aux opportunités",
     },
+    passions: {
+      eyebrow: "Hors du code",
+      heading: "Ce qui me ressource",
+    },
     footer: "La Réunion",
   },
   en: {
@@ -147,9 +151,87 @@ const T = {
       desc: "Available to discuss ambitious projects, permanent or freelance opportunities. I reply fast.",
       open: "Open to opportunities",
     },
+    passions: {
+      eyebrow: "Beyond the code",
+      heading: "What keeps me going",
+    },
     footer: "Réunion Island",
   },
 } as const;
+
+// ─── Passions data ────────────────────────────────────────────────────────────
+const passionItems = {
+  fr: [
+    {
+      key: "car",
+      emoji: "🚗",
+      bg: "from-orange-50 to-amber-50",
+      accent: "text-orange-500",
+      title: "Passionné de voitures",
+      desc: "Mon père était mécanicien. Entretenir une voiture, c'est aussi entretenir les souvenirs des moments passés ensemble.",
+    },
+    {
+      key: "gym",
+      emoji: "💪",
+      bg: "from-blue-50 to-indigo-50",
+      accent: "text-blue-500",
+      title: "Musculation & marche",
+      desc: "Je fais de la muscu et de la marche régulièrement — pour garder la forme et vider la tête.",
+    },
+    {
+      key: "travel",
+      emoji: "✈️",
+      bg: "from-sky-50 to-cyan-50",
+      accent: "text-sky-500",
+      title: "Voyager",
+      desc: "J'ai eu la chance de découvrir plusieurs pays et régions.",
+      places: ["Madagascar (6 provinces)", "La Réunion", "Île Maurice", "Paris", "Toulouse", "Genève"],
+    },
+    {
+      key: "bike",
+      emoji: "🚴",
+      bg: "from-emerald-50 to-green-50",
+      accent: "text-emerald-500",
+      title: "Vélo & randonnée",
+      desc: "De temps en temps, pour me ressourcer dans la nature de La Réunion.",
+    },
+  ],
+  en: [
+    {
+      key: "car",
+      emoji: "🚗",
+      bg: "from-orange-50 to-amber-50",
+      accent: "text-orange-500",
+      title: "Car enthusiast",
+      desc: "My father was a mechanic. Working on a car is a way to keep those shared moments alive.",
+    },
+    {
+      key: "gym",
+      emoji: "💪",
+      bg: "from-blue-50 to-indigo-50",
+      accent: "text-blue-500",
+      title: "Gym & walking",
+      desc: "I work out and walk regularly — to stay in shape and clear my head.",
+    },
+    {
+      key: "travel",
+      emoji: "✈️",
+      bg: "from-sky-50 to-cyan-50",
+      accent: "text-sky-500",
+      title: "Travelling",
+      desc: "I've been lucky to discover several countries and regions.",
+      places: ["Madagascar (6 provinces)", "Réunion Island", "Mauritius", "Paris", "Toulouse", "Geneva"],
+    },
+    {
+      key: "bike",
+      emoji: "🚴",
+      bg: "from-emerald-50 to-green-50",
+      accent: "text-emerald-500",
+      title: "Cycling & hiking",
+      desc: "Occasionally, to recharge in Réunion's nature.",
+    },
+  ],
+};
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const parallelJobs = {
@@ -603,6 +685,42 @@ export default function Home() {
             {t.competences.hint}
           </motion.p>
           <KeyboardSkills />
+        </div>
+      </section>
+
+      {/* ——— PASSIONS ——— */}
+      <section className="max-w-4xl mx-auto px-6 py-20 sm:py-24">
+        <motion.p {...fade(0)} className="text-xs font-semibold tracking-widest text-indigo-500 uppercase mb-4">
+          {t.passions.eyebrow}
+        </motion.p>
+        <motion.h2 {...scroll(0.05)} className="text-3xl sm:text-4xl font-bold text-zinc-900 leading-tight mb-10">
+          {t.passions.heading}
+        </motion.h2>
+
+        <div className="grid sm:grid-cols-2 gap-4">
+          {passionItems[lang].map((item, i) => (
+            <motion.div
+              key={item.key}
+              {...scaleIn(i * 0.08)}
+              className={`rounded-3xl p-7 bg-gradient-to-br ${item.bg} overflow-hidden`}
+            >
+              {/* Emoji — gros, visuel */}
+              <span className="text-5xl block mb-5 leading-none" role="img" aria-label={item.title}>
+                {item.emoji}
+              </span>
+              <p className="text-lg font-bold text-zinc-900 mb-2">{item.title}</p>
+              <p className="text-sm text-zinc-600 leading-relaxed">{item.desc}</p>
+              {"places" in item && item.places && (
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {item.places.map((place) => (
+                    <span key={place} className="text-xs font-semibold px-3 py-1 bg-white/70 text-zinc-700 rounded-full backdrop-blur-sm">
+                      {place}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          ))}
         </div>
       </section>
 

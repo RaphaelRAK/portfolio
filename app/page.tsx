@@ -32,6 +32,16 @@ const passionAccents: Record<string, string> = {
 type Lang  = "fr" | "en";
 type Theme = "light" | "dark";
 
+// Age dynamique — anniversaire le 2 août 1999
+function getAge(): number {
+  const today = new Date();
+  const birth = new Date(1999, 7, 2); // mois 0-indexé → 7 = août
+  let age = today.getFullYear() - birth.getFullYear();
+  if (today < new Date(today.getFullYear(), 7, 2)) age--;
+  return age;
+}
+const AGE = getAge();
+
 // ─── Animation helpers ────────────────────────────────────────────────────────
 const ease = [0.22, 1, 0.36, 1] as const;
 const vp   = { once: true, margin: "-60px" } as const;
@@ -65,7 +75,7 @@ const T = {
     about: {
       eyebrow: "À propos",
       heading: "Qui je suis",
-      p1: "Développeur malgache de 25 ans, j'ai grandi à Madagascar avant de rejoindre La Réunion. J'ai travaillé pour financer mes études — en cuisine, en caisse, comme inventoriste — et j'ai obtenu Mention Bien à chaque étape.",
+      p1: "Développeur de {age} ans, j'ai grandi à Madagascar avant de rejoindre La Réunion. J'ai travaillé pour financer mes études — en cuisine, en caisse, comme inventoriste — et j'ai obtenu Mention Bien à chaque étape.",
       p2: "Ce qui me motive dans le code, c'est de construire des choses utiles, performantes et sécurisées. Chaque application est une brique que j'apporte à la société.",
       p3: "Tout seul on va vite, ensemble on va plus loin.",
       p4: "En CDI chez plüm, je cherche à continuer à grandir — à La Réunion, en métropole (Toulouse, Lyon, Paris) ou en remote.",
@@ -124,7 +134,7 @@ const T = {
     about: {
       eyebrow: "About",
       heading: "Who I am",
-      p1: "A 25-year-old Malagasy developer, I grew up in Madagascar before moving to Réunion Island. I worked to fund my studies — in kitchens, at checkouts, as an inventory clerk — and graduated with Honours every time.",
+      p1: "A {age}-year-old Malagasy developer, I grew up in Madagascar before moving to Réunion Island. I worked to fund my studies — in kitchens, at checkouts, as an inventory clerk — and graduated with Honours every time.",
       p2: "What drives me in coding is building things that are useful, performant, and secure. Every application is a contribution I make to society.",
       p3: "Alone you go fast, together you go further.",
       p4: "On a permanent contract at plüm, I'm looking to keep growing — on Réunion Island, in mainland France (Toulouse, Lyon, Paris) or remotely.",
@@ -430,7 +440,7 @@ export default function Home() {
           {t.about.heading}
         </motion.h2>
         <div className="grid sm:grid-cols-2 gap-8 max-w-3xl">
-          <motion.p {...fade(0.0)} className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">{t.about.p1}</motion.p>
+          <motion.p {...fade(0.0)} className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">{t.about.p1.replace("{age}", String(AGE))}</motion.p>
           <motion.p {...fade(0.1)} className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">{t.about.p2}</motion.p>
           <motion.p {...fade(0.2)} className="text-base font-semibold text-zinc-800 dark:text-zinc-200 italic border-l-4 border-indigo-200 dark:border-indigo-700 pl-4">
             &ldquo;{t.about.p3}&rdquo;

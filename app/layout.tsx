@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     description:
       "J'ai travaillé en cuisine et en caisse pendant que j'apprenais à coder. Mention Bien à chaque diplôme.",
     siteName: "Portfolio — Aina Raphaël Rakotonaivo",
-    images: [{ url: "/raph.jpeg", width: 800, height: 800, alt: "Aina Raphaël Rakotonaivo" }],
+    images: [{ url: "/assets/icon.png", width: 1290, height: 1290, alt: "Aina Raphaël Rakotonaivo" }],
     locale: "fr_FR",
     type: "website",
   },
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Aina Raphaël Rakotonaivo — Développeur Fullstack",
     description:
       "J'ai travaillé en cuisine et en caisse pendant que j'apprenais à coder. Mention Bien à chaque diplôme.",
-    images: ["/raph.jpeg"],
+    images: ["/assets/icon.png"],
   },
 };
 

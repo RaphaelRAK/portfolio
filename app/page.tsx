@@ -410,8 +410,8 @@ export default function Home() {
           </div>
 
           {/* Photo */}
-          <motion.div {...up(0.5)} className="hidden lg:flex shrink-0 justify-center">
-            <div className="relative w-60 h-60 rounded-full overflow-hidden border-4 border-white dark:border-zinc-800 shadow-2xl shadow-indigo-200/60 dark:shadow-indigo-900/40 ring-1 ring-indigo-100 dark:ring-indigo-900">
+          <motion.div {...up(0.5)} className="flex shrink-0 justify-center">
+            <div className="relative w-44 h-44 lg:w-60 lg:h-60 rounded-full overflow-hidden border-4 border-white dark:border-zinc-800 shadow-2xl shadow-indigo-200/60 dark:shadow-indigo-900/40 ring-1 ring-indigo-100 dark:ring-indigo-900">
               <Image src="/raph.jpeg" alt="Aina Raphaël Rakotonaivo" fill className="object-cover" priority />
             </div>
           </motion.div>

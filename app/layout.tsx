@@ -1,106 +1,57 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display, DM_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
+import { baseMetadata } from "@/lib/metadata";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const playfair = Playfair_Display({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const dmMono = DM_Mono({
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-dm-mono",
+  display: "swap",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: "Développeur Fullstack React Native & Next.js | La Réunion & France — Aina Raphaël Rakotonaivo",
-  description:
-    "Développeur Fullstack basé à La Réunion (974), disponible en CDI ou CDD en France — La Réunion, Paris, Lyon, Toulouse ou remote. React Native, Next.js, NestJS, TypeScript. Mention Bien à chaque diplôme. Portfolio et contact.",
-  keywords: [
-    "développeur fullstack France",
-    "développeur fullstack La Réunion",
-    "développeur React Native France",
-    "développeur React Native La Réunion",
-    "développeur Next.js France",
-    "développeur Next.js La Réunion",
-    "développeur web France",
-    "développeur web La Réunion",
-    "développeur mobile France",
-    "développeur mobile La Réunion",
-    "développeur 974",
-    "développeur informaticien La Réunion",
-    "développeur CDI France",
-    "développeur CDI La Réunion",
-    "développeur remote France",
-    "développeur Toulouse",
-    "développeur Lyon",
-    "développeur Paris",
-    "ingénieur logiciel France",
-    "développeur NestJS",
-    "développeur TypeScript",
-    "informaticien La Réunion",
-    "Aina Raphaël Rakotonaivo",
-  ],
-  authors: [{ name: "Aina Raphaël Rakotonaivo", url: SITE_URL }],
-  creator: "Aina Raphaël Rakotonaivo",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
-  },
-  openGraph: {
-    title: "Développeur Fullstack React Native & Next.js | La Réunion & France",
-    description:
-      "Développeur Fullstack basé à La Réunion, disponible en France (Paris, Lyon, Toulouse, remote). React Native, Next.js, NestJS. CDI, CDD ou projet bénévole.",
-    siteName: "Portfolio — Aina Raphaël Rakotonaivo",
-    images: [{ url: "/assets/icon.png", width: 1290, height: 1290, alt: "Aina Raphaël Rakotonaivo — Développeur Fullstack La Réunion France" }],
-    locale: "fr_FR",
-    type: "website",
-    url: SITE_URL,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Développeur Fullstack | La Réunion & France — Aina Raphaël Rakotonaivo",
-    description:
-      "Développeur Fullstack React Native & Next.js, basé à La Réunion, disponible en CDI/CDD en France.",
-    images: ["/assets/icon.png"],
-  },
-  alternates: {
-    canonical: SITE_URL,
-  },
-};
+export const metadata: Metadata = baseMetadata;
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Aina Raphaël Rakotonaivo",
+  givenName: "Aina Raphaël",
+  familyName: "Rakotonaivo",
   jobTitle: "Développeur Fullstack",
   description:
-    "Développeur Fullstack basé à La Réunion, spécialisé React Native, Next.js et NestJS. Disponible en CDI, CDD ou projet bénévole en France — La Réunion, Paris, Lyon, Toulouse ou remote.",
-  url: SITE_URL,
-  image: `${SITE_URL}/assets/icon.png`,
+    "Développeur Fullstack spécialisé React Native, Next.js et NestJS, basé à La Réunion.",
+  email: "raphael.rakotonaivo@gmail.com",
+  url: "https://raphael-rakotonaivo.vercel.app",
+  image: "https://raphael-rakotonaivo.vercel.app/og-image.png",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "La Réunion",
+    addressLocality: "Saint-Denis",
     addressRegion: "La Réunion",
     addressCountry: "FR",
   },
-  areaServed: [
-    { "@type": "Place", name: "La Réunion", addressCountry: "FR" },
-    { "@type": "Place", name: "France", addressCountry: "FR" },
-    { "@type": "Place", name: "Remote France" },
-  ],
   knowsAbout: [
-    "React Native", "Next.js", "NestJS", "TypeScript", "JavaScript",
-    "PostgreSQL", "Supabase", "Docker", "Tailwind CSS", "Redux Toolkit",
-    "GitHub Actions", "Stripe", "Firebase", "Figma",
+    "React Native", "Next.js", "NestJS", "TypeScript",
+    "PostgreSQL", "Supabase", "Docker", "Stripe", "Firebase",
   ],
+  alumniOf: {
+    "@type": "EducationalOrganization",
+    name: "Université de La Réunion",
+  },
   sameAs: [
-    "https://github.com/RaphaelRAK",
+    "https://github.com/raphael137",
     "https://gitlab.com/raphael137",
+    "https://www.linkedin.com/in/aina-rapha%C3%ABl-rakotonaivo-80a821189/",
   ],
 };
 
@@ -110,15 +61,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="fr" className={`${playfair.variable} ${dmMono.variable}`}>
+      <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+      </head>
+      <body>
         {children}
+        <Analytics />
       </body>
     </html>
   );

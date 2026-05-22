@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="maido-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#04060d"/>
+      <stop offset="60%" stop-color="#080d18"/>
+      <stop offset="100%" stop-color="#0c1220"/>
+    </linearGradient>
+    <linearGradient id="maido-glow" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="maido-mtn-far" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#161b26"/>
+      <stop offset="100%" stop-color="#0a0d14"/>
+    </linearGradient>
+    <linearGradient id="maido-mtn-mid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#101420"/>
+      <stop offset="100%" stop-color="#080a10"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="800" height="450" fill="url(#maido-sky)"/>
+
+  <!-- Stars -->
+  <circle cx="62" cy="28" r="1.2" fill="#fff" opacity="0.7"/>
+  <circle cx="148" cy="18" r="1" fill="#fff" opacity="0.6"/>
+  <circle cx="224" cy="42" r="1.5" fill="#fff" opacity="0.8"/>
+  <circle cx="310" cy="15" r="1" fill="#fff" opacity="0.5"/>
+  <circle cx="395" cy="32" r="1.2" fill="#fff" opacity="0.7"/>
+  <circle cx="468" cy="10" r="1" fill="#fff" opacity="0.6"/>
+  <circle cx="544" cy="48" r="1.5" fill="#fff" opacity="0.5"/>
+  <circle cx="620" cy="22" r="1" fill="#fff" opacity="0.8"/>
+  <circle cx="698" cy="38" r="1.2" fill="#fff" opacity="0.6"/>
+  <circle cx="758" cy="14" r="1" fill="#fff" opacity="0.7"/>
+  <circle cx="88" cy="68" r="1" fill="#fff" opacity="0.4"/>
+  <circle cx="192" cy="58" r="1.2" fill="#fff" opacity="0.5"/>
+  <circle cx="352" cy="72" r="1" fill="#fff" opacity="0.4"/>
+  <circle cx="510" cy="62" r="1.2" fill="#fff" opacity="0.5"/>
+  <circle cx="680" cy="56" r="1" fill="#fff" opacity="0.4"/>
+  <circle cx="740" cy="80" r="1" fill="#fff" opacity="0.3"/>
+  <circle cx="28" cy="52" r="1" fill="#fff" opacity="0.5"/>
+  <circle cx="776" cy="60" r="1.2" fill="#fff" opacity="0.4"/>
+
+  <!-- Summit glow halo -->
+  <ellipse cx="400" cy="210" rx="220" ry="90" fill="url(#maido-glow)"/>
+
+  <!-- Far mountain range -->
+  <polygon points="0,320 60,220 110,240 180,195 240,215 310,185 370,170 430,162 490,178 560,168 620,190 680,205 740,192 800,210 800,450 0,450" fill="url(#maido-mtn-far)"/>
+
+  <!-- Mid mountains -->
+  <polygon points="0,360 50,280 110,300 190,255 270,278 350,235 400,222 450,238 520,258 590,270 660,248 720,265 800,250 800,450 0,450" fill="url(#maido-mtn-mid)"/>
+
+  <!-- Foreground dark ridge -->
+  <polygon points="0,420 80,375 160,390 260,368 360,378 460,362 560,375 660,360 760,378 800,368 800,450 0,450" fill="#060810"/>
+
+  <!-- VR perspective grid (ground) -->
+  <g opacity="0.12" stroke="#c9a84c" stroke-width="0.6" fill="none">
+    <!-- Horizon lines -->
+    <line x1="0" y1="340" x2="800" y2="340"/>
+    <line x1="20" y1="365" x2="780" y2="365"/>
+    <line x1="60" y1="390" x2="740" y2="390"/>
+    <line x1="110" y1="415" x2="690" y2="415"/>
+    <!-- Converging lines to vanishing point -->
+    <line x1="400" y1="285" x2="0" y2="450"/>
+    <line x1="400" y1="285" x2="160" y2="450"/>
+    <line x1="400" y1="285" x2="320" y2="450"/>
+    <line x1="400" y1="285" x2="400" y2="450"/>
+    <line x1="400" y1="285" x2="480" y2="450"/>
+    <line x1="400" y1="285" x2="640" y2="450"/>
+    <line x1="400" y1="285" x2="800" y2="450"/>
+  </g>
+
+  <!-- Summit marker -->
+  <circle cx="400" cy="162" r="3" fill="#c9a84c" opacity="0.7"/>
+  <circle cx="400" cy="162" r="8" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.3"/>
+  <circle cx="400" cy="162" r="14" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- VR crosshair reticle -->
+  <g stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.55">
+    <circle cx="400" cy="210" r="28"/>
+    <circle cx="400" cy="210" r="2" fill="#c9a84c"/>
+    <line x1="386" y1="210" x2="368" y2="210"/>
+    <line x1="414" y1="210" x2="432" y2="210"/>
+    <line x1="400" y1="196" x2="400" y2="178"/>
+    <line x1="400" y1="224" x2="400" y2="242"/>
+    <!-- Corner ticks on circle -->
+    <line x1="380" y1="190" x2="374" y2="184"/>
+    <line x1="420" y1="190" x2="426" y2="184"/>
+    <line x1="380" y1="230" x2="374" y2="236"/>
+    <line x1="420" y1="230" x2="426" y2="236"/>
+  </g>
+
+  <!-- Corner VR HUD brackets -->
+  <g stroke="#c9a84c" stroke-width="1.5" fill="none" opacity="0.5">
+    <polyline points="24,24 24,56 56,56"/>
+    <polyline points="776,24 776,56 744,56"/>
+    <polyline points="24,426 24,394 56,394"/>
+    <polyline points="776,426 776,394 744,394"/>
+  </g>
+
+  <!-- HUD text placeholders -->
+  <rect x="34" y="30" width="52" height="6" rx="1" fill="#c9a84c" opacity="0.25"/>
+  <rect x="34" y="41" width="36" height="4" rx="1" fill="#c9a84c" opacity="0.15"/>
+  <rect x="34" y="49" width="44" height="4" rx="1" fill="#c9a84c" opacity="0.1"/>
+
+  <rect x="714" y="30" width="52" height="6" rx="1" fill="#c9a84c" opacity="0.25"/>
+  <rect x="722" y="41" width="44" height="4" rx="1" fill="#c9a84c" opacity="0.15"/>
+  <rect x="728" y="49" width="38" height="4" rx="1" fill="#c9a84c" opacity="0.1"/>
+
+  <!-- Altitude bar (right side) -->
+  <rect x="748" y="160" width="4" height="130" rx="2" fill="#0f1220"/>
+  <rect x="748" y="224" width="4" height="66" rx="2" fill="#c9a84c" opacity="0.4"/>
+  <rect x="743" y="221" width="14" height="6" rx="1" fill="#c9a84c" opacity="0.35"/>
+  <rect x="759" y="222" width="28" height="5" rx="1" fill="#c9a84c" opacity="0.2"/>
+  <rect x="759" y="230" width="20" height="4" rx="1" fill="#1a1a2a"/>
+
+  <!-- Bottom status bar -->
+  <rect x="0" y="430" width="800" height="20" fill="#06080d" opacity="0.8"/>
+  <rect x="24" y="436" width="80" height="5" rx="1" fill="#c9a84c" opacity="0.15"/>
+  <rect x="360" y="436" width="80" height="5" rx="1" fill="#c9a84c" opacity="0.1"/>
+  <rect x="694" y="436" width="82" height="5" rx="1" fill="#c9a84c" opacity="0.15"/>
+</svg>

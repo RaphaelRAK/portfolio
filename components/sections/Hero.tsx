@@ -1,217 +1,109 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { siteConfig } from "@/lib/metadata";
+import { Marquee } from "@/components/ui/Marquee";
+import { TechLogoRotator } from "@/components/ui/TechLogoRotator";
 import { getTechLogo } from "@/lib/devicon";
-import { SiGithub, SiGitlab } from "react-icons/si";
-import { FaLinkedinIn } from "react-icons/fa";
 
-const techMarqueeItems = [
-  "React Native", "Next.js", "NestJS", "TypeScript",
-  "PostgreSQL", "Supabase", "Docker", "Tailwind CSS",
-  "Stripe", "Firebase", "n8n", "Scaleway", "Redux Toolkit",
+const trustedTech = [
+  "React Native",
+  "Next.js",
+  "NestJS",
+  "TypeScript",
+  "PostgreSQL",
+  "Supabase",
+  "Docker",
+  "Stripe",
 ];
 
-const techMarquee = [...techMarqueeItems, ...techMarqueeItems];
+const chipLogos = ["React Native", "Next.js", "NestJS"];
 
-const socialLinks = [
-  { label: "GitHub",   href: siteConfig.github,   Icon: SiGithub   },
-  { label: "GitLab",   href: siteConfig.gitlab,    Icon: SiGitlab   },
-  { label: "LinkedIn", href: siteConfig.linkedin,  Icon: FaLinkedinIn },
-];
+const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-const EASE = [0.25, 0.1, 0.25, 1] as [number, number, number, number];
-const fadeUp = (delay = 0) => ({
+const reveal = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.7, ease: EASE, delay },
+  transition: { duration: 0.8, ease: EASE, delay },
 });
 
 export default function Hero() {
-  const scrollToContact = () =>
-    document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
-  const scrollToExperience = () =>
-    document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" });
+  const scrollTo = (selector: string) =>
+    document.querySelector(selector)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-between pt-28 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex-1 flex flex-col justify-center">
-
-        {/* Top label row */}
-        <motion.div {...fadeUp(0.1)} className="flex items-center gap-3 mb-10">
-          <span className="section-label">Portfolio 2025</span>
-          <span className="block h-px w-10" style={{ backgroundColor: "var(--color-border)" }} />
-          <span
-            className="font-mono text-[0.65rem] tracking-widest uppercase"
-            style={{ color: "var(--color-text-muted)" }}
-          >
-            La Réunion · Remote
-          </span>
+    <section className="relative flex min-h-screen flex-col justify-between overflow-hidden pt-28 md:pt-32">
+      <div className="container-hanzo flex flex-1 flex-col justify-center py-12 md:py-16">
+        <motion.div {...reveal(0.1)} className="mb-10 flex justify-center md:mb-14">
+          <span className="badge-open">Disponible — CDI chez plüm</span>
         </motion.div>
 
-        {/* Main grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
-
-          {/* Name block — left */}
-          <div className="lg:col-span-8">
-            {/* Role label */}
-            <motion.p
-              {...fadeUp(0.2)}
-              className="font-mono text-[0.68rem] tracking-[0.22em] uppercase mb-5"
-              style={{ color: "var(--color-accent)" }}
+        <motion.h1
+          {...reveal(0.2)}
+          className="heading-xl mx-auto max-w-5xl text-center font-display text-[var(--color-text)]"
+        >
+          <span className="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-2 md:gap-x-4">
+            <span>Développement</span>
+            <motion.span
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6, ease: EASE, delay: 0.5 }}
+              className="inline-flex shrink-0 translate-y-[0.08em]"
             >
-              Fullstack Developer
-            </motion.p>
+              <TechLogoRotator technologies={chipLogos} />
+            </motion.span>
+            <span className="word-muted">fullstack</span>
+          </span>
+          <span className="mt-2 block md:mt-3">
+            pour des <span className="word-muted">produits</span> qui durent
+          </span>
+        </motion.h1>
 
-            {/* Massive name */}
-            <div className="overflow-visible">
-              <motion.h1
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.9, delay: 0.25 }}
-                className="font-display leading-[0.88] tracking-tight"
-                style={{ fontSize: "clamp(3.8rem, 10vw, 10rem)" }}
-              >
-                <span className="block" style={{ color: "var(--color-text)" }}>Aina</span>
-                <span className="block" style={{ color: "var(--color-text)" }}>Raphaël</span>
-                {/* Last name — outlined, slightly overflows */}
-                <span
-                  className="block font-display italic"
-                  style={{
-                    color: "transparent",
-                    WebkitTextStroke: "1.5px var(--color-text)",
-                    letterSpacing: "-0.02em",
-                    marginLeft: "-0.04em",
-                  }}
-                >
-                  Rakotonaivo
-                </span>
-              </motion.h1>
-            </div>
+        <motion.p
+          {...reveal(0.35)}
+          className="mx-auto mt-8 max-w-xl text-center text-base leading-relaxed text-muted md:mt-10 md:text-lg"
+        >
+          Je conçois et déploie des applications mobiles et web qui tiennent en production —
+          du prototype au serveur, depuis La Réunion.
+        </motion.p>
 
-            {/* Tagline */}
-            <motion.p
-              {...fadeUp(0.55)}
-              className="mt-8 max-w-md text-sm leading-relaxed"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              5 ans à jongler entre les études et la vraie vie.
-              Aujourd&apos;hui en CDI, je construis des produits
-              qui tiennent en prod — mobile, web, infrastructure.
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div {...fadeUp(0.65)} className="mt-8 flex flex-wrap items-center gap-8">
-              <button
-                onClick={scrollToExperience}
-                className="font-mono text-[0.7rem] tracking-widest uppercase link-underline"
-                style={{ color: "var(--color-text)" }}
-              >
-                Mon parcours ↓
-              </button>
-              <button
-                onClick={scrollToContact}
-                className="font-mono text-[0.7rem] tracking-widest uppercase"
-                style={{ color: "var(--color-accent)", textDecoration: "underline", textUnderlineOffset: "4px" }}
-              >
-                Me contacter →
-              </button>
-            </motion.div>
-
-            {/* Social */}
-            <motion.div {...fadeUp(0.75)} className="mt-8 flex items-center gap-5 pb-12">
-              {socialLinks.map((s, i) => (
-                <span key={s.label} className="flex items-center gap-5">
-                  {i > 0 && (
-                    <span
-                      className="block w-3 h-px"
-                      style={{ backgroundColor: "var(--color-border)" }}
-                    />
-                  )}
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 font-mono text-[0.65rem] tracking-widest uppercase transition-colors"
-                    style={{ color: "var(--color-text-muted)" }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "var(--color-accent)")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "var(--color-text-muted)")}
-                  >
-                    <s.Icon size={11} />
-                    {s.label}
-                  </a>
-                </span>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Photo — right */}
-          <motion.div
-            {...fadeUp(0.35)}
-            className="lg:col-span-4 flex justify-end items-end pb-12"
-          >
-            <div className="relative">
-              <div
-                className="absolute -top-4 -right-4 w-full h-full pointer-events-none"
-                style={{ border: "1px solid var(--color-border)" }}
-              />
-              <div
-                className="relative overflow-hidden"
-                style={{ width: 240, height: 300 }}
-              >
-                <Image
-                  src="/images/raph.jpeg"
-                  alt="Aina Raphaël Rakotonaivo"
-                  fill
-                  className="object-cover photo-treatment"
-                  priority
-                  sizes="240px"
-                />
-                <div
-                  className="absolute bottom-0 left-0 right-0 h-[3px]"
-                  style={{ backgroundColor: "var(--color-accent)" }}
-                />
-              </div>
-            </div>
-          </motion.div>
-        </div>
+        <motion.div
+          {...reveal(0.45)}
+          className="mt-10 flex flex-wrap items-center justify-center gap-3 md:mt-12"
+        >
+          <button type="button" onClick={() => scrollTo("#projects")} className="btn-primary">
+            Voir mes projets
+          </button>
+          <button type="button" onClick={() => scrollTo("#contact")} className="btn-secondary">
+            Me contacter
+          </button>
+        </motion.div>
       </div>
 
-      {/* Marquee band */}
-      <div
-        className="border-t border-b py-3 overflow-hidden"
-        style={{
-          borderColor: "var(--color-border)",
-          backgroundColor: "var(--color-surface)",
-        }}
-        aria-hidden
-      >
-        <div className="flex">
-          <div className="marquee-track">
-            {techMarquee.map((name, i) => {
-              const logo = getTechLogo(name);
-              return (
-                <span
-                  key={i}
-                  className="font-mono text-[0.6rem] tracking-widest uppercase flex items-center gap-2"
-                  style={{ color: "var(--color-text-muted)" }}
-                >
-                  {logo
-                    ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={logo} alt="" aria-hidden width={12} height={12}
-                           style={{ objectFit: "contain", opacity: 0.5, flexShrink: 0 }} />
-                    )
-                    : <span className="block w-3 h-3" />
-                  }
-                  {name}
-                  <span style={{ color: "var(--color-accent)", opacity: 0.5 }}>·</span>
-                </span>
-              );
-            })}
-          </div>
-        </div>
+      <div className="pb-6 pt-4 md:pb-8">
+        <Marquee className="py-2">
+          {trustedTech.map((name) => {
+            const logo = getTechLogo(name);
+            return (
+              <span
+                key={name}
+                className="inline-flex items-center gap-2.5 text-base font-medium text-[var(--color-text)]"
+              >
+                {logo && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={logo}
+                    alt=""
+                    width={20}
+                    height={20}
+                    aria-hidden
+                    style={{ objectFit: "contain" }}
+                  />
+                )}
+                {name}
+              </span>
+            );
+          })}
+        </Marquee>
       </div>
     </section>
   );

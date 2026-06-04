@@ -2,120 +2,109 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
+import { SectionLabel } from "@/components/ui/SectionLabel";
+import { Reveal, RevealWords } from "@/components/ui/Reveal";
 
-const stats = [
-  { value: "4×", label: "Mention Bien", sub: "Bac · Licence · Master · CNFDI" },
-  { value: "5 ans", label: "double vie", sub: "études + emploi en parallèle" },
-  { value: "10+", label: "technos en prod", sub: "React Native, NestJS, Supabase…" },
-  { value: "CDI", label: "depuis 2025", sub: "plüm · La Réunion" },
+const highlights = [
+  { value: "4×", label: "Mention Bien" },
+  { value: "5 ans", label: "double vie" },
+  { value: "10+", label: "technos en prod" },
+  { value: "CDI", label: "depuis 2025" },
 ];
+
+const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 export default function About() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" ref={ref} className="py-24 px-6 md:px-12">
-      <div
-        className="max-w-7xl mx-auto py-16 px-8 md:px-16"
-        style={{
-          backgroundColor: "var(--color-surface)",
-          border: "1px solid var(--color-border)",
-        }}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-16"
-        >
-          {/* Bio */}
+    <section id="about" ref={ref} className="py-[var(--section-padding)]">
+      <div className="container-hanzo">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           <div className="lg:col-span-7">
-            <span className="section-label block mb-6">À propos</span>
-
-            <h2
-              className="font-display font-light leading-tight mb-8"
-              style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)", color: "var(--color-text)" }}
-            >
-              Né à Madagascar,
+            <Reveal>
+              <SectionLabel>À propos</SectionLabel>
+            </Reveal>
+            <h2 className="heading-lg font-display text-[var(--color-text)] mt-4 mb-8">
+              <RevealWords text="Né à Madagascar," />
               <br />
-              <span className="italic">construit à La Réunion.</span>
+              <RevealWords text="construit à La Réunion." className="word-muted" delay={0.15} />
             </h2>
 
-            <div
-              className="space-y-4 leading-relaxed text-base"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              <p>
-                Développeur fullstack formé à l&apos;Université de La Réunion — Master 2
-                Informatique 2025, Mention Bien. Pendant 5 ans, j&apos;ai mené de front études
-                et emplois alimentaires : restaurant universitaire, Burger King, SHISO Burger,
-                inventoriste. Cette double vie m&apos;a appris la discipline, la résistance et
-                l&apos;efficacité.
-              </p>
-              <p>
-                Aujourd&apos;hui en CDI chez{" "}
-                <span style={{ color: "var(--color-text)", fontWeight: 500 }}>plüm</span>, je conçois et
-                déploie des applications mobiles React Native et des plateformes web Next.js.
-                Du prototype au serveur de production : je couvre l&apos;ensemble de la chaîne.
-              </p>
-              <p>
-                Je cherche à construire des produits qui ont de l&apos;impact — en équipe,
-                en remote, depuis La Réunion ou en métropole.
-              </p>
+            <div className="space-y-5 text-muted text-base leading-relaxed">
+              <Reveal delay={0.1}>
+                <p>
+                  Développeur fullstack formé à l&apos;Université de La Réunion — Master 2
+                  Informatique 2025, Mention Bien. Pendant 5 ans, j&apos;ai mené de front études
+                  et emplois alimentaires : restaurant universitaire, Burger King, SHISO Burger,
+                  inventoriste. Cette double vie m&apos;a appris la discipline, la résistance et
+                  l&apos;efficacité.
+                </p>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <p>
+                  Aujourd&apos;hui en CDI chez{" "}
+                  <strong className="text-[var(--color-text)] font-medium">plüm</strong>, je conçois
+                  et déploie des applications mobiles React Native et des plateformes web Next.js —
+                  du prototype au serveur de production.
+                </p>
+              </Reveal>
             </div>
 
-            <motion.blockquote
-              initial={{ opacity: 0, x: -12 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="mt-10 pl-5"
-              style={{ borderLeft: "2px solid var(--color-accent)" }}
-            >
-              <p
-                className="font-display italic font-normal leading-snug"
-                style={{ fontSize: "clamp(1rem, 2vw, 1.3rem)", color: "var(--color-text)" }}
-              >
-                &ldquo;Jongler avec plusieurs responsabilités n&apos;est pas une contrainte —
-                c&apos;est une compétence.&rdquo;
-              </p>
-            </motion.blockquote>
+            <Reveal delay={0.25}>
+              <blockquote className="mt-10 pl-6 border-l-2 border-[var(--color-text)]">
+                <p className="font-serif italic text-2xl md:text-3xl text-[var(--color-text)] leading-snug">
+                  &ldquo;Jongler avec plusieurs responsabilités n&apos;est pas une contrainte —
+                  c&apos;est une compétence.&rdquo;
+                </p>
+              </blockquote>
+            </Reveal>
           </div>
 
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.15, duration: 0.6 }}
-            className="lg:col-span-5"
-          >
-            <div className="grid grid-cols-2 gap-px" style={{ backgroundColor: "var(--color-border)" }}>
-              {stats.map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  animate={inView ? { opacity: 1 } : {}}
-                  transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-                  className="flex flex-col justify-end p-6"
-                  style={{ backgroundColor: "var(--color-bg)" }}
-                >
-                  <p
-                    className="font-display font-light leading-none mb-2"
-                    style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "var(--color-text)" }}
+          <div className="lg:col-span-5 flex flex-col gap-6">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.7, ease: EASE }}
+              className="relative w-full overflow-hidden rounded-[var(--radius-card)]"
+              style={{ aspectRatio: "4/5" }}
+            >
+              <Image
+                src="/images/raph.jpeg"
+                alt="Aina Raphaël Rakotonaivo"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
+              className="card-hanzo p-8"
+            >
+              <p className="text-sm text-muted mb-6">En chiffres</p>
+              <div className="grid grid-cols-2 gap-6">
+                {highlights.map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.4, delay: 0.3 + index * 0.08 }}
                   >
-                    {stat.value}
-                  </p>
-                  <p className="font-mono text-[0.62rem] tracking-widest uppercase mb-1" style={{ color: "var(--color-accent)" }}>
-                    {stat.label}
-                  </p>
-                  <p className="font-mono text-[0.55rem] tracking-wide" style={{ color: "var(--color-text-muted)" }}>
-                    {stat.sub}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
+                    <p className="font-display text-4xl font-semibold text-[var(--color-text)] leading-none tracking-tight">
+                      {stat.value}
+                    </p>
+                    <p className="text-sm text-muted mt-2">{stat.label}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

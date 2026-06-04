@@ -3,103 +3,91 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 
 const hobbies = [
   {
     title: "Voitures",
-    desc: "Passion héritée de mon père mécanicien. Les voitures, c'est une histoire de famille.",
+    desc: "Passion héritée de mon père mécanicien.",
     image: "/images/car.png",
-    wide: true,
+    layout: "col-span-2 row-span-2",
+    gradient: "linear-gradient(160deg, #f0ede8 0%, #e8e4dc 100%)",
   },
   {
-    title: "Musculation & Marche",
-    desc: "L'effort physique régulier — pour la discipline autant que pour la tête.",
+    title: "Sport",
+    desc: "Musculation et marche — discipline corps et esprit.",
     image: "/images/sports.png",
-    wide: false,
+    layout: "col-span-1 row-span-1",
+    gradient: "linear-gradient(160deg, #eceef0 0%, #e2e6ea 100%)",
   },
   {
     title: "Voyages",
-    desc: "Madagascar, La Réunion, Île Maurice, Paris, Toulouse, Genève.",
+    desc: "Madagascar, La Réunion, Paris, Genève…",
     image: "/images/voyage.png",
-    wide: false,
+    layout: "col-span-1 row-span-1",
+    gradient: "linear-gradient(160deg, #eef0ec 0%, #e4e8e0 100%)",
   },
   {
-    title: "Vélo & Randonnée",
-    desc: "Explorer l'île à vélo ou à pied — les hauts de La Réunion n'ont pas fini de me surprendre.",
+    title: "Vélo & Rando",
+    desc: "Explorer les hauts de l'île à pied ou à vélo.",
     image: "/images/velo.png",
-    wide: true,
+    layout: "col-span-2 row-span-1",
+    gradient: "linear-gradient(160deg, #eaede8 0%, #dfe5dc 100%)",
   },
 ];
+
+const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 export default function Hobbies() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="hobbies" ref={ref} className="py-32 px-6 md:px-12">
-      <div
-        className="py-20 px-6 md:px-12"
-        style={{ backgroundColor: "var(--color-surface)" }}
-      >
-        <div className="max-w-7xl mx-auto">
-          {/* Section header */}
-          <div className="flex items-center gap-4 mb-16">
-            <span className="font-display text-7xl font-light text-[var(--color-surface-2)] select-none">
-              07
-            </span>
-            <div>
-              <span className="rule-line mb-2" />
-              <p className="section-label text-[var(--color-accent)]">Centres d&apos;intérêt</p>
-            </div>
-          </div>
+    <section id="hobbies" ref={ref} className="py-[var(--section-padding)]">
+      <div className="container-hanzo">
+        <SectionHeader label="Hors du code" title="Centres d'intérêt" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--color-border)]">
-            {hobbies.map((hobby, i) => (
-              <motion.div
-                key={hobby.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.1, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                className="group relative overflow-hidden"
-                style={{ backgroundColor: "var(--color-bg)", minHeight: 320 }}
-              >
-                {/* Background image */}
-                <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+        <div className="grid grid-cols-2 lg:grid-cols-4 auto-rows-[minmax(11rem,1fr)] gap-4 md:gap-5">
+          {hobbies.map((hobby, index) => (
+            <motion.article
+              key={hobby.title}
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: index * 0.08, duration: 0.55, ease: EASE }}
+              className={`group relative overflow-hidden rounded-[var(--radius-card)] ${hobby.layout} min-h-[11rem]`}
+              style={{ background: hobby.gradient }}
+            >
+              {/* Image — full bleed, no white box */}
+              <div className="absolute inset-0 flex items-center justify-center p-5 md:p-6">
+                <div className="relative h-full w-full transition-transform duration-700 group-hover:scale-105">
                   <Image
                     src={hobby.image}
-                    alt={hobby.title}
+                    alt=""
                     fill
-                    className="object-contain object-center opacity-70 group-hover:opacity-90 transition-opacity duration-500"
-                    style={{ paddingBottom: "6rem", paddingTop: "1rem" }}
-                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className="object-contain drop-shadow-lg"
+                    sizes="(max-width: 640px) 50vw, 25vw"
+                    aria-hidden
                   />
                 </div>
+              </div>
 
-                {/* Gradient overlay — only bottom third so image stays visible */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: "linear-gradient(to top, var(--color-bg) 32%, rgba(0,0,0,0.15) 65%, transparent 100%)",
-                  }}
-                />
+              {/* Gradient overlay for text legibility */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-90" />
 
-                {/* Content */}
-                <div className="relative h-full flex flex-col justify-end p-6" style={{ minHeight: 320 }}>
-                  {/* Gold accent line */}
-                  <div
-                    className="w-8 h-0.5 mb-4 transition-all duration-300 group-hover:w-12"
-                    style={{ backgroundColor: "var(--color-accent)" }}
-                  />
-                  <h3 className="font-display text-xl font-light text-[var(--color-text)] mb-2">
-                    {hobby.title}
-                  </h3>
-                  <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">
-                    {hobby.desc}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              {/* Text overlay */}
+              <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                <h3 className="font-display text-lg md:text-xl font-semibold tracking-tight text-white">
+                  {hobby.title}
+                </h3>
+                <p className="mt-1 max-w-xs text-xs leading-relaxed text-white/75 md:text-sm md:opacity-0 md:translate-y-2 md:transition-all md:duration-500 md:group-hover:opacity-100 md:group-hover:translate-y-0">
+                  {hobby.desc}
+                </p>
+              </div>
+
+              {/* Corner accent */}
+              <div className="absolute top-4 right-4 h-8 w-8 rounded-full border border-white/20 opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100 scale-75" />
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>

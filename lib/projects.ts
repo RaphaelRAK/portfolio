@@ -1,6 +1,7 @@
 export interface Project {
   slug: string;
   title: string;
+  category: string;
   shortDesc: string;
   longDesc: string;
   stack: string[];
@@ -23,6 +24,7 @@ export const projects: Project[] = [
   {
     slug: "plum-services",
     title: "Plüm Services",
+    category: "Professionnel · CDI",
     shortDesc:
       "Application mobile & plateforme SaaS de gestion de services à domicile — React Native, Next.js, NestJS.",
     longDesc:
@@ -61,8 +63,41 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    slug: "revo",
+    title: "Revo",
+    category: "Projet personnel",
+    shortDesc:
+      "SaaS pour coachs sportifs — gestion clients, séances, programmes et suivi de progression.",
+    longDesc:
+      "Projet personnel développé sur mon temps libre. Revo centralise l'activité des coachs sportifs : profils clients, saisie rapide des séances, programmes assignables, bibliothèque d'exercices illustrés et détection automatique des records personnels. Interface pensée pour une utilisation sur le terrain, avec offre freemium et essai Pro.",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "PostgreSQL",
+      "Vercel",
+    ],
+    period: "2025 — présent",
+    context: "Projet personnel",
+    role: "Créateur & Développeur Fullstack",
+    links: {
+      live: "https://coach-track.vercel.app/",
+    },
+    images: [
+      "/images/revo/revo-2-exercices.png",
+      "/images/revo/revo-0-hero.png",
+      "/images/revo/revo-1-dashboard.png",
+      "/images/revo/revo-3-activite.png",
+      "/images/revo/revo-4-clients.png",
+      "/images/revo/revo-5-tendances.png",
+    ],
+    featured: true,
+  },
+  {
     slug: "ter-suivi-etudiants",
     title: "TER — Suivi Activité Étudiants",
+    category: "Recherche · Université",
     shortDesc:
       "Service de tracking et visualisation des activités étudiants sur les serveurs de travaux pratiques.",
     longDesc:
@@ -80,6 +115,7 @@ export const projects: Project[] = [
   {
     slug: "maido-vr",
     title: "Maïdo VR",
+    category: "Recherche · Université",
     shortDesc:
       "Mise à jour du prototype de visite virtuelle du laboratoire atmosphérique du Maïdo.",
     longDesc:
@@ -97,6 +133,7 @@ export const projects: Project[] = [
   {
     slug: "stage-esige",
     title: "Plateforme de gestion universitaire",
+    category: "Stage · Madagascar",
     shortDesc:
       "Application web de gestion numérique pour une université privée — cours en ligne et processus d'examen.",
     longDesc:
@@ -109,9 +146,13 @@ export const projects: Project[] = [
     images: ["/images/esige.png"],
     previewNotice:
       "Aperçu généré à partir du projet réel. L'application est destinée à un usage interne.",
-    featured: false,
+    featured: true,
   },
 ];
+
+export function getFeaturedProjects(): Project[] {
+  return projects.filter((project) => project.featured);
+}
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);

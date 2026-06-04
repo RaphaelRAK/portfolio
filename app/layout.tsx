@@ -1,22 +1,21 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Mono } from "next/font/google";
+import { Instrument_Serif, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { baseMetadata } from "@/lib/metadata";
 
-const playfair = Playfair_Display({
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400"],
   style: ["normal", "italic"],
-  variable: "--font-playfair",
+  variable: "--font-instrument",
   display: "swap",
 });
 
-const dmMono = DM_Mono({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
-  variable: "--font-dm-mono",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -61,14 +60,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${playfair.variable} ${dmMono.variable}`}>
+    <html lang="fr" className={`${instrumentSerif.variable} ${inter.variable}`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
+      <body className="font-body antialiased">
         {children}
         <Analytics />
       </body>

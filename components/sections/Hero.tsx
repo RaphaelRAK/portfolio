@@ -97,8 +97,8 @@ export default function Hero() {
               transition={{ duration: 0.7, ease: EASE, delay: 0.38 }}
               className="inline-block"
             >
-              livrées{" "}
-            </motion.span>
+              livrées
+            </motion.span>{" "}
             <motion.span
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}

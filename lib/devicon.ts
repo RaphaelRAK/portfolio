@@ -49,9 +49,15 @@ export const TECH_LOGO: Record<string, string> = {
   "Git":            `${B}/git/git-original.svg`,
   "Bash":           `${B}/bash/bash-original.svg`,
 
-  // No devicon → text-only:
-  // REST API, React Query, Scaleway, Stripe, Mailjet, n8n,
-  // ElevenLabs, WebXR, Dash
+  // SimpleIcons CDN pour les services absents de devicon
+  "Stripe":         "https://cdn.simpleicons.org/stripe/635BFF",
+  "n8n":            "https://cdn.simpleicons.org/n8n/EA4B71",
+  "Scaleway":       "https://cdn.simpleicons.org/scaleway/4F0599",
+  "Vercel":         "https://cdn.simpleicons.org/vercel/000000",
+  "Mailjet":        "https://cdn.simpleicons.org/mailjet/09B3AF",
+  "ElevenLabs":     "https://cdn.simpleicons.org/elevenlabs/000000",
+  "WebXR":          "https://cdn.simpleicons.org/webgl/990000",
+  "Dash":           "https://cdn.simpleicons.org/plotly/3F4F75",
 };
 
 export function getTechLogo(name: string): string | undefined {

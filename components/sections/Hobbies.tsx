@@ -9,38 +9,34 @@ const hobbies = [
   {
     title: "Voitures",
     desc: "Passion héritée de mon père mécanicien.",
-    image: "/images/car.png",
+    image: "/images/hobbies/car.jpg",
     layout: "col-span-2 row-span-2",
-    gradient:
-      "radial-gradient(circle at 20% 0%, rgba(255,255,255,0.28), transparent 55%), linear-gradient(150deg, #ff6a3d 0%, #e11d48 100%)",
-    glow: "rgba(225, 29, 72, 0.45)",
+    tint: "linear-gradient(to top, rgba(225,29,72,0.55), rgba(225,29,72,0) 55%)",
+    glow: "rgba(225, 29, 72, 0.4)",
   },
   {
     title: "Sport",
     desc: "Musculation et marche — discipline corps et esprit.",
-    image: "/images/sports.png",
+    image: "/images/hobbies/sport.jpg",
     layout: "col-span-1 row-span-1",
-    gradient:
-      "radial-gradient(circle at 80% 0%, rgba(255,255,255,0.25), transparent 55%), linear-gradient(150deg, #4e74ff 0%, #2336c9 100%)",
-    glow: "rgba(46, 91, 255, 0.45)",
+    tint: "linear-gradient(to top, rgba(35,54,201,0.6), rgba(35,54,201,0) 55%)",
+    glow: "rgba(46, 91, 255, 0.4)",
   },
   {
     title: "Voyages",
     desc: "Madagascar, La Réunion, Paris, Genève…",
-    image: "/images/voyage.png",
+    image: "/images/hobbies/voyage.jpg",
     layout: "col-span-1 row-span-1",
-    gradient:
-      "radial-gradient(circle at 20% 0%, rgba(255,255,255,0.3), transparent 55%), linear-gradient(150deg, #fbbf24 0%, #ea7a0c 100%)",
-    glow: "rgba(245, 158, 11, 0.45)",
+    tint: "linear-gradient(to top, rgba(234,122,12,0.55), rgba(234,122,12,0) 55%)",
+    glow: "rgba(245, 158, 11, 0.4)",
   },
   {
     title: "Vélo & Rando",
     desc: "Explorer les hauts de l'île à pied ou à vélo.",
-    image: "/images/velo.png",
+    image: "/images/hobbies/rando.jpg",
     layout: "col-span-2 row-span-1",
-    gradient:
-      "radial-gradient(circle at 85% 10%, rgba(255,255,255,0.25), transparent 55%), linear-gradient(150deg, #34d399 0%, #0d8a60 100%)",
-    glow: "rgba(16, 185, 129, 0.45)",
+    tint: "linear-gradient(to top, rgba(13,138,96,0.55), rgba(13,138,96,0) 55%)",
+    glow: "rgba(16, 185, 129, 0.4)",
   },
 ];
 
@@ -64,28 +60,23 @@ export default function Hobbies() {
               transition={{ delay: index * 0.08, duration: 0.55, ease: EASE }}
               className={`group relative overflow-hidden rounded-[var(--radius-card)] ${hobby.layout} min-h-[11rem] transition-all duration-500 hover:-translate-y-1`}
               style={{
-                background: hobby.gradient,
                 boxShadow: `0 1px 2px rgba(10,10,20,0.06), 0 20px 44px -20px ${hobby.glow}`,
               }}
             >
-              {/* Image — full bleed, no white box */}
-              <div className="absolute inset-0 flex items-center justify-center p-5 md:p-6">
-                <div className="relative h-full w-full transition-transform duration-700 group-hover:scale-105 group-hover:-rotate-1">
-                  <Image
-                    src={hobby.image}
-                    alt=""
-                    fill
-                    className="object-contain drop-shadow-xl"
-                    sizes="(max-width: 640px) 50vw, 25vw"
-                    aria-hidden
-                  />
-                </div>
-              </div>
+              {/* Photo plein cadre */}
+              <Image
+                src={hobby.image}
+                alt={hobby.title}
+                fill
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              />
 
-              {/* Gradient overlay for text legibility */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-90" />
+              {/* Teinte colorée + assombrissement pour le texte */}
+              <div className="absolute inset-0" style={{ background: hobby.tint }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
 
-              {/* Text overlay */}
+              {/* Texte */}
               <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
                 <h3 className="font-display text-lg md:text-xl font-semibold tracking-tight text-white drop-shadow-sm">
                   {hobby.title}
@@ -96,7 +87,7 @@ export default function Hobbies() {
               </div>
 
               {/* Liseré intérieur lumineux */}
-              <div className="pointer-events-none absolute inset-0 rounded-[var(--radius-card)] ring-1 ring-inset ring-white/25" />
+              <div className="pointer-events-none absolute inset-0 rounded-[var(--radius-card)] ring-1 ring-inset ring-white/20" />
             </motion.article>
           ))}
         </div>

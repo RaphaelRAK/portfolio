@@ -4,6 +4,14 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/lib/metadata";
 import posthog from "posthog-js";
+import { ExpandableTabs, type TabItem } from "@/components/ui/expandable-tabs";
+import {
+  BriefcaseBusiness,
+  FolderOpen,
+  Layers,
+  MessageCircleQuestion,
+  Mail,
+} from "lucide-react";
 
 const navLinks = [
   { label: "Parcours", href: "#experience" },
@@ -11,6 +19,17 @@ const navLinks = [
   { label: "Stack", href: "#stack" },
   { label: "FAQ", href: "#faq" },
 ];
+
+const navTabs: TabItem[] = [
+  { title: "Parcours", icon: BriefcaseBusiness },
+  { title: "Projets", icon: FolderOpen },
+  { title: "Stack", icon: Layers },
+  { title: "FAQ", icon: MessageCircleQuestion },
+  { type: "separator" },
+  { title: "Contact", icon: Mail },
+];
+
+const tabTargets = ["#experience", "#projects", "#stack", "#faq", null, "#contact"];
 
 const CV_PATH = "/CV_Raphael_Rakotonaivo.pdf";
 
@@ -59,18 +78,16 @@ export default function Navbar() {
             RAR<span className="text-muted font-normal">.dev</span>
           </a>
 
-          <ul className="hidden md:flex items-center gap-1 p-1 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)]">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <button
-                  onClick={() => handleNav(link.href)}
-                  className="px-4 py-2 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text)] rounded-full transition-colors cursor-pointer"
-                >
-                  {link.label}
-                </button>
-              </li>
-            ))}
-          </ul>
+          <div className="hidden md:block">
+            <ExpandableTabs
+              tabs={navTabs}
+              onChange={(index) => {
+                if (index === null) return;
+                const target = tabTargets[index];
+                if (target) handleNav(target);
+              }}
+            />
+          </div>
 
           <div className="hidden md:flex items-center gap-3">
             <a

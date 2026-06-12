@@ -54,7 +54,7 @@ export default function About() {
             </div>
 
             <Reveal delay={0.25}>
-              <blockquote className="mt-10 pl-6 border-l-2 border-[var(--color-text)]">
+              <blockquote className="mt-10 pl-6 border-l-[3px] border-[var(--color-primary)]">
                 <p className="font-serif italic text-2xl md:text-3xl text-[var(--color-text)] leading-snug">
                   &ldquo;Jongler avec plusieurs responsabilités n&apos;est pas une contrainte —
                   c&apos;est une compétence.&rdquo;
@@ -91,11 +91,11 @@ export default function About() {
                 {highlights.map((stat, index) => (
                   <motion.div
                     key={stat.label}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.4, delay: 0.3 + index * 0.08 }}
+                    initial={{ opacity: 0, scale: 0.85, y: 16 }}
+                    animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.3 + index * 0.1, ease: EASE }}
                   >
-                    <p className="font-display text-4xl font-semibold text-[var(--color-text)] leading-none tracking-tight">
+                    <p className="font-display text-4xl font-bold text-[var(--color-text)] leading-none tracking-tight">
                       {stat.value}
                     </p>
                     <p className="text-sm text-muted mt-2">{stat.label}</p>

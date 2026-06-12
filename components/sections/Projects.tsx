@@ -34,23 +34,34 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        <div className="flex flex-col gap-6 md:gap-8">
-          {featuredProjects.map((project, index) => (
-            <Link key={project.slug} href={`/projects/${project.slug}/`} className="block">
-              <ProjectCard
-                title={project.title}
-                category={project.category}
-                description={project.shortDesc}
-                period={project.period}
-                image={project.images?.[0]}
-                previewNotice={project.previewNotice}
-                technologies={project.stack}
-                accent={project.accent}
-                reversed={index % 2 === 1}
-                index={index}
-              />
-            </Link>
-          ))}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+          {featuredProjects.map((project, index) => {
+            // Pleine largeur pour le 1er projet et pour la dernière carte
+            // quand elle serait orpheline dans la grille à 2 colonnes
+            const featured =
+              index === 0 ||
+              (index === featuredProjects.length - 1 &&
+                featuredProjects.length % 2 === 0);
+            return (
+              <Link
+                key={project.slug}
+                href={`/projects/${project.slug}/`}
+                className={`block h-full ${featured ? "md:col-span-2" : ""}`}
+              >
+                <ProjectCard
+                  title={project.title}
+                  category={project.category}
+                  description={project.shortDesc}
+                  period={project.period}
+                  image={project.images?.[0]}
+                  previewNotice={project.previewNotice}
+                  accent={project.accent}
+                  featured={featured}
+                  index={index}
+                />
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

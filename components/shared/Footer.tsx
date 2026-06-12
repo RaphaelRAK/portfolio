@@ -10,14 +10,6 @@ export default function Footer() {
 
         <div className="flex items-center gap-6">
           <a
-            href={siteConfig.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="section-label hover:text-[var(--color-text)] transition-colors"
-          >
-            GitHub
-          </a>
-          <a
             href={siteConfig.gitlab}
             target="_blank"
             rel="noopener noreferrer"

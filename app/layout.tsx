@@ -48,7 +48,6 @@ const jsonLd = {
     name: "Université de La Réunion",
   },
   sameAs: [
-    "https://github.com/raphael137",
     "https://gitlab.com/raphael137",
     "https://www.linkedin.com/in/aina-rapha%C3%ABl-rakotonaivo-80a821189/",
   ],

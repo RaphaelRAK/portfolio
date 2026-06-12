@@ -8,7 +8,6 @@ export const siteConfig = {
   url: "https://raphael-rakotonaivo.vercel.app",
   email: "raphael.rakotonaivo@gmail.com",
   location: "La Réunion",
-  github: "https://github.com/raphael137",
   gitlab: "https://gitlab.com/raphael137",
   linkedin: "https://www.linkedin.com/in/aina-rapha%C3%ABl-rakotonaivo-80a821189/",
   keywords: [

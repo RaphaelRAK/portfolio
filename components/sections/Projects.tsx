@@ -45,6 +45,7 @@ export default function Projects() {
                 image={project.images?.[0]}
                 previewNotice={project.previewNotice}
                 technologies={project.stack}
+                accent={project.accent}
                 reversed={index % 2 === 1}
                 index={index}
               />

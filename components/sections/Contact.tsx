@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { siteConfig } from "@/lib/metadata";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { RevealWords } from "@/components/ui/Reveal";
+import { Button, LiquidButton } from "@/components/ui/button";
 import { SiGithub, SiGitlab } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa";
 import posthog from "posthog-js";
@@ -41,17 +42,22 @@ export default function Contact() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 mb-10">
-            <a href={`mailto:${siteConfig.email}`} className="btn-primary">
-              M&apos;envoyer un email
-            </a>
-            <a
-              href="/CV_Raphael_Rakotonaivo.pdf"
-              download
-              className="btn-secondary"
-              onClick={() => posthog.capture("cv_downloaded", { source: "contact" })}
+            <Button asChild variant="cool" className="h-12 rounded-full px-8 text-[0.95rem]">
+              <a href={`mailto:${siteConfig.email}`}>M&apos;envoyer un email</a>
+            </Button>
+            <LiquidButton
+              asChild
+              size="xl"
+              className="rounded-full px-8 text-[0.95rem] font-semibold"
             >
-              Télécharger le CV
-            </a>
+              <a
+                href="/CV_Raphael_Rakotonaivo.pdf"
+                download
+                onClick={() => posthog.capture("cv_downloaded", { source: "contact" })}
+              >
+                Télécharger le CV
+              </a>
+            </LiquidButton>
           </div>
 
           <div className="flex flex-wrap justify-center gap-6">

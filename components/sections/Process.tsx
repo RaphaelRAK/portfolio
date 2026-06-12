@@ -10,21 +10,27 @@ const steps = [
     title: "Comprendre",
     description:
       "Analyse du besoin, du contexte métier et des contraintes techniques avant d'écrire la première ligne.",
-    accent: "rgba(22, 163, 74, 0.12)",
+    accent: "rgba(46, 91, 255, 0.1)",
+    dot: "linear-gradient(to top, #2e5bff, #4e74ff)",
+    dotShadow: "0 8px 18px -8px rgba(46, 91, 255, 0.6)",
   },
   {
     number: "02",
     title: "Construire",
     description:
       "Développement itératif — mobile React Native, web Next.js, API NestJS — avec des livrables testables.",
-    accent: "rgba(0, 0, 0, 0.04)",
+    accent: "rgba(249, 115, 22, 0.1)",
+    dot: "linear-gradient(to top, #ea7a0c, #fb923c)",
+    dotShadow: "0 8px 18px -8px rgba(249, 115, 22, 0.6)",
   },
   {
     number: "03",
     title: "Déployer",
     description:
       "Mise en production, monitoring, Docker, CI — des produits qui tournent, pas des démos.",
-    accent: "rgba(0, 0, 0, 0.06)",
+    accent: "rgba(16, 185, 129, 0.1)",
+    dot: "linear-gradient(to top, #0d8a60, #34d399)",
+    dotShadow: "0 8px 18px -8px rgba(16, 185, 129, 0.6)",
   },
 ];
 
@@ -60,7 +66,10 @@ export default function Process() {
                 className="group relative flex flex-col items-center md:items-start text-center md:text-left"
               >
                 {/* Step dot on timeline */}
-                <div className="relative z-10 mb-8 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[var(--color-text)] text-[var(--color-bg)] font-display text-sm font-semibold tracking-tight transition-transform duration-300 group-hover:scale-110">
+                <div
+                  className="relative z-10 mb-8 flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-white font-display text-sm font-semibold tracking-tight ring-1 ring-inset ring-white/25 transition-transform duration-300 group-hover:scale-110"
+                  style={{ background: step.dot, boxShadow: step.dotShadow }}
+                >
                   {step.number}
                 </div>
 

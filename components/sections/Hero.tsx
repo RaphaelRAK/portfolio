@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Button, LiquidButton } from "@/components/ui/button";
 import { Marquee } from "@/components/ui/Marquee";
 import { TechLogoRotator } from "@/components/ui/TechLogoRotator";
 import { getTechLogo } from "@/lib/devicon";
@@ -70,12 +71,22 @@ export default function Hero() {
           {...reveal(0.45)}
           className="mt-10 flex flex-wrap items-center justify-center gap-3 md:mt-12"
         >
-          <button type="button" onClick={() => scrollTo("#projects")} className="btn-primary">
+          <Button
+            type="button"
+            variant="cool"
+            onClick={() => scrollTo("#projects")}
+            className="h-12 rounded-full px-8 text-[0.95rem]"
+          >
             Voir mes projets
-          </button>
-          <button type="button" onClick={() => scrollTo("#contact")} className="btn-secondary">
+          </Button>
+          <LiquidButton
+            type="button"
+            size="xl"
+            onClick={() => scrollTo("#contact")}
+            className="rounded-full px-8 text-[0.95rem] font-semibold"
+          >
             Me contacter
-          </button>
+          </LiquidButton>
         </motion.div>
       </div>
 

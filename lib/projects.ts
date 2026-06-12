@@ -18,11 +18,14 @@ export interface Project {
   images?: string[];
   previewNotice?: string;
   featured: boolean;
+  /** Couleur d'accent de la carte (hex) */
+  accent: string;
 }
 
 export const projects: Project[] = [
   {
     slug: "plum-services",
+    accent: "#f43f5e",
     title: "Plüm Services",
     category: "Professionnel · CDI",
     shortDesc:
@@ -64,6 +67,7 @@ export const projects: Project[] = [
   },
   {
     slug: "revo",
+    accent: "#f97316",
     title: "Revo",
     category: "Projet personnel",
     shortDesc:
@@ -96,6 +100,7 @@ export const projects: Project[] = [
   },
   {
     slug: "ter-suivi-etudiants",
+    accent: "#10b981",
     title: "TER — Suivi Activité Étudiants",
     category: "Recherche · Université",
     shortDesc:
@@ -114,6 +119,7 @@ export const projects: Project[] = [
   },
   {
     slug: "maido-vr",
+    accent: "#8b5cf6",
     title: "Maïdo VR",
     category: "Recherche · Université",
     shortDesc:
@@ -132,6 +138,7 @@ export const projects: Project[] = [
   },
   {
     slug: "stage-esige",
+    accent: "#f59e0b",
     title: "Plateforme de gestion universitaire",
     category: "Stage · Madagascar",
     shortDesc:

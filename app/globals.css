@@ -1,17 +1,38 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #d9d9d9;
-  --color-bg-light: #ededed;
+  --color-bg: #ffffff;
+  --color-bg-light: #fafafa;
   --color-surface: #ffffff;
-  --color-surface-2: #f3f3f3;
-  --color-border: #cccccc;
-  --color-text: #000000;
-  --color-text-muted: rgba(0, 0, 0, 0.5);
-  --color-text-faint: rgba(0, 0, 0, 0.3);
+  --color-surface-2: #f4f5f8;
+  --color-border: #e4e4e9;
+  --color-text: #0a0a0c;
+  --color-text-muted: rgba(10, 10, 20, 0.55);
+  --color-text-faint: rgba(10, 10, 20, 0.3);
   --color-accent: #16a34a;
-  --color-pill: #000000;
+  --color-accent-foreground: #ffffff;
+  --color-pill: #0a0a0c;
   --color-pill-text: #ffffff;
+
+  /* Vivid palette */
+  --color-primary: #2e5bff;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #eef2ff;
+  --color-secondary-foreground: #1e2f9e;
+  --color-destructive: #ef4444;
+  --color-muted: #f4f5f8;
+  --color-muted-foreground: rgba(10, 10, 20, 0.55);
+  --color-background: #ffffff;
+  --color-foreground: #0a0a0c;
+  --color-ring: #2e5bff;
+  --color-input: #e4e4e9;
+
+  /* Per-context accents (projets, hobbies) */
+  --color-rose: #f43f5e;
+  --color-tangerine: #f97316;
+  --color-emerald: #10b981;
+  --color-amber: #f59e0b;
+  --color-violet: #8b5cf6;
 
   --font-display: var(--font-inter);
   --font-body: var(--font-inter);
@@ -40,11 +61,22 @@
 
   body {
     background-color: var(--color-bg);
-    background-image: radial-gradient(
-      ellipse 90% 55% at 50% -8%,
-      rgba(255, 255, 255, 0.85),
-      rgba(255, 255, 255, 0) 70%
-    );
+    background-image:
+      radial-gradient(
+        ellipse 60% 45% at 12% -8%,
+        rgba(46, 91, 255, 0.09),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 50% 38% at 92% -4%,
+        rgba(244, 63, 94, 0.07),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 45% 30% at 50% 108%,
+        rgba(16, 185, 129, 0.06),
+        transparent 70%
+      );
     background-attachment: fixed;
     color: var(--color-text);
     font-family: var(--font-body), "Inter", system-ui, sans-serif;
@@ -54,8 +86,8 @@
   }
 
   ::selection {
-    background-color: var(--color-text);
-    color: var(--color-bg);
+    background-color: var(--color-primary);
+    color: #ffffff;
   }
 
   ::-webkit-scrollbar {
@@ -101,7 +133,7 @@
     font-weight: 400;
     font-size: clamp(1.1rem, 2vw, 1.5rem);
     line-height: 1;
-    color: var(--color-text-muted);
+    color: var(--color-primary);
   }
 
   .section-label::before {
@@ -148,16 +180,19 @@
     gap: 0.5rem;
     padding: 0.8rem 1.5rem;
     border-radius: var(--radius-pill);
-    background: var(--color-pill);
-    color: var(--color-pill-text);
+    background: linear-gradient(to top, var(--color-primary), #4e74ff);
+    color: var(--color-primary-foreground);
     font-size: 0.95rem;
     font-weight: 500;
     letter-spacing: -0.01em;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    box-shadow:
+      0 8px 20px -8px rgba(46, 91, 255, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transition: transform 0.2s ease, filter 0.2s ease;
   }
 
   .btn-primary:hover {
-    opacity: 0.85;
+    filter: brightness(1.1);
     transform: translateY(-1px);
   }
 
@@ -169,22 +204,28 @@
     padding: 0.8rem 1.5rem;
     border-radius: var(--radius-pill);
     background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--color-border);
     color: var(--color-text);
     font-size: 0.95rem;
     font-weight: 500;
     letter-spacing: -0.01em;
     backdrop-filter: blur(8px);
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
   }
 
   .btn-secondary:hover {
     background: #ffffff;
+    border-color: var(--color-primary);
     transform: translateY(-1px);
   }
 
   .card-hanzo {
     background: var(--color-surface);
     border-radius: var(--radius-card);
+    border: 1px solid rgba(10, 10, 20, 0.07);
+    box-shadow:
+      0 1px 2px rgba(10, 10, 20, 0.04),
+      0 16px 40px -24px rgba(10, 10, 20, 0.12);
     overflow: hidden;
   }
 
@@ -195,6 +236,7 @@
     padding: 0.55rem 1rem;
     border-radius: var(--radius-pill);
     background: var(--color-surface);
+    border: 1px solid var(--color-border);
     font-size: 0.95rem;
     font-weight: 500;
   }
@@ -206,6 +248,8 @@
     padding: 0.6rem 1.25rem;
     border-radius: var(--radius-pill);
     background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 10px -4px rgba(10, 10, 20, 0.12);
     color: var(--color-text);
     font-size: 0.95rem;
     font-weight: 500;

@@ -34,7 +34,7 @@ const faqItems = [
   },
   {
     question: "Comment puis-je vous contacter ?",
-    answer: `Par email à ${siteConfig.email}, via LinkedIn ou GitLab. Je réponds généralement sous 48h.`,
+    answer: `Par email à ${siteConfig.email}, via LinkedIn ou GitLab. Je réponds généralement sous 24h.`,
   },
 ];
 

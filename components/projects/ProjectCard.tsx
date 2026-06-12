@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useInView } from "framer-motion";
+import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -58,16 +58,18 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const reducedMotion = useReducedMotion();
   const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
   const count = images.length;
   const phoneSlots = featured ? 3 : 2;
   const hasCarousel = mediaType === "mobile" ? count > phoneSlots : count > 1;
 
   useEffect(() => {
-    if (!hasCarousel || !inView) return;
+    if (!hasCarousel || !inView || paused || reducedMotion) return;
     const timer = setInterval(() => setSlide((s) => s + 1), SLIDE_MS);
     return () => clearInterval(timer);
-  }, [hasCarousel, inView]);
+  }, [hasCarousel, inView, paused, reducedMotion]);
 
   const dotCount = count;
   const activeDot = count > 0 ? slide % count : 0;
@@ -78,6 +80,8 @@ export default function ProjectCard({
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.65, delay: (index % 2) * 0.1, ease: EASE }}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
       className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-white shadow-[0_1px_3px_rgba(10,10,20,0.05)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-24px_rgba(10,10,20,0.18)]"
     >
       {/* ── Zone média ── */}

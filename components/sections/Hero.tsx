@@ -14,7 +14,7 @@ const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const chipLogos = ["React Native", "Next.js", "NestJS"];
 
 const stats = [
-  { value: "2", label: "apps en production" },
+  { value: "4", label: "produits en production" },
   { value: "M2", label: "Mention Bien — 2025" },
   { value: "plüm", label: "alternance 2024 → CDI 2025" },
 ];

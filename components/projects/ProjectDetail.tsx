@@ -103,6 +103,29 @@ export default function ProjectDetail({ project, slug }: Props) {
               ))}
             </motion.div>
           )}
+
+          {/* Chiffres clés */}
+          {project.metrics && project.metrics.length > 0 && (
+            <motion.div
+              {...reveal(0.32)}
+              className="mt-10 flex flex-col items-stretch divide-y divide-[var(--color-border)] rounded-2xl border border-[var(--color-border)] bg-white/80 backdrop-blur-sm sm:max-w-2xl sm:flex-row sm:divide-x sm:divide-y-0"
+            >
+              {project.metrics.map((metric) => (
+                <div
+                  key={metric.label}
+                  className="flex flex-1 flex-col items-center gap-0.5 px-5 py-4 text-center"
+                >
+                  <span
+                    className="font-display text-xl font-bold tracking-tight md:text-2xl"
+                    style={{ color: `color-mix(in srgb, ${accent} 80%, black)` }}
+                  >
+                    {metric.value}
+                  </span>
+                  <span className="text-xs text-muted">{metric.label}</span>
+                </div>
+              ))}
+            </motion.div>
+          )}
         </div>
       </section>
 
@@ -136,7 +159,7 @@ export default function ProjectDetail({ project, slug }: Props) {
               className="flex gap-5 pb-4 w-max"
             >
               {project.images.map((src, index) => {
-                const isMobile = src.includes("plum") || src.includes("mobile");
+                const isMobile = project.mediaType === "mobile";
                 return (
                   <motion.div
                     key={src}
@@ -190,6 +213,158 @@ export default function ProjectDetail({ project, slug }: Props) {
               <p className="text-base leading-[1.85] text-muted">{project.longDesc}</p>
             </motion.section>
 
+            {/* Ce que j'ai fait */}
+            {project.highlights && project.highlights.length > 0 && (
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: EASE }}
+              >
+                <h2
+                  className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.14em]"
+                  style={{ color: `color-mix(in srgb, ${accent} 85%, black)` }}
+                >
+                  Ce que j&apos;ai fait
+                </h2>
+                <div className="mt-4 h-0.5 w-10 mb-6" style={{ background: accent }} />
+                <ul className="space-y-3">
+                  {project.highlights.map((item, index) => (
+                    <motion.li
+                      key={item}
+                      initial={{ opacity: 0, x: -16 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.45, delay: index * 0.07, ease: EASE }}
+                      className="flex items-start gap-3 text-[0.9375rem] leading-relaxed text-muted"
+                    >
+                      <span
+                        className="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[0.6rem] font-bold text-white"
+                        style={{ background: accent }}
+                        aria-hidden
+                      >
+                        ✓
+                      </span>
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.section>
+            )}
+
+            {/* Défis techniques — problème / solution / résultat */}
+            {project.challenges && project.challenges.length > 0 && (
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: EASE }}
+              >
+                <h2
+                  className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.14em]"
+                  style={{ color: `color-mix(in srgb, ${accent} 85%, black)` }}
+                >
+                  Défis techniques
+                </h2>
+                <div className="mt-4 h-0.5 w-10 mb-6" style={{ background: accent }} />
+                <div className="space-y-5">
+                  {project.challenges.map((challenge, index) => (
+                    <motion.article
+                      key={challenge.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.55, delay: index * 0.08, ease: EASE }}
+                      className="overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white shadow-[0_1px_3px_rgba(10,10,20,0.04)]"
+                    >
+                      <div
+                        className="border-b px-6 py-4"
+                        style={{
+                          background: `color-mix(in srgb, ${accent} 6%, white)`,
+                          borderColor: `color-mix(in srgb, ${accent} 15%, transparent)`,
+                        }}
+                      >
+                        <h3 className="font-display text-base font-semibold tracking-tight text-[var(--color-text)] md:text-lg">
+                          {challenge.title}
+                        </h3>
+                      </div>
+                      <div className="space-y-4 px-6 py-5">
+                        <div>
+                          <p className="mb-1 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[#ef4444]">
+                            Problème
+                          </p>
+                          <p className="text-sm leading-relaxed text-muted">{challenge.problem}</p>
+                        </div>
+                        <div>
+                          <p className="mb-1 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[var(--color-primary)]">
+                            Solution
+                          </p>
+                          <p className="text-sm leading-relaxed text-muted">{challenge.solution}</p>
+                        </div>
+                        {challenge.result && (
+                          <div>
+                            <p className="mb-1 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[#10b981]">
+                              Résultat
+                            </p>
+                            <p className="text-sm leading-relaxed text-muted">{challenge.result}</p>
+                          </div>
+                        )}
+                      </div>
+                    </motion.article>
+                  ))}
+                </div>
+              </motion.section>
+            )}
+
+            {/* Architecture */}
+            {project.architecture && project.architecture.length > 0 && (
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: EASE }}
+              >
+                <h2
+                  className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.14em]"
+                  style={{ color: `color-mix(in srgb, ${accent} 85%, black)` }}
+                >
+                  Architecture
+                </h2>
+                <div className="mt-4 h-0.5 w-10 mb-6" style={{ background: accent }} />
+                <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:flex-wrap">
+                  {project.architecture.map((node, index) => (
+                    <motion.div
+                      key={node}
+                      initial={{ opacity: 0, scale: 0.92 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: index * 0.12, ease: EASE }}
+                      className="flex items-center gap-2"
+                    >
+                      <span
+                        className="flex-1 rounded-xl border px-4 py-3 text-center text-sm font-semibold text-[var(--color-text)] sm:flex-none"
+                        style={{
+                          background: `color-mix(in srgb, ${accent} 7%, white)`,
+                          borderColor: `color-mix(in srgb, ${accent} 22%, transparent)`,
+                        }}
+                      >
+                        {node}
+                      </span>
+                      {index < project.architecture!.length - 1 && (
+                        <span
+                          className="hidden text-lg sm:block"
+                          style={{ color: accent }}
+                          aria-hidden
+                        >
+                          →
+                        </span>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.section>
+            )}
+
             {/* Stack */}
             <motion.section
               initial={{ opacity: 0, y: 20 }}
@@ -234,7 +409,7 @@ export default function ProjectDetail({ project, slug }: Props) {
             ))}
 
             {/* Liens — sidebar */}
-            {links.length > 0 && (
+            {(links.length > 0 || project.sourceNote) && (
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -246,7 +421,7 @@ export default function ProjectDetail({ project, slug }: Props) {
                   className="mb-3 text-[0.65rem] font-bold uppercase tracking-[0.14em]"
                   style={{ color: `color-mix(in srgb, ${accent} 85%, black)` }}
                 >
-                  Liens
+                  {links.length > 0 ? "Liens" : "Accès"}
                 </p>
                 <div className="flex flex-col gap-2">
                   {links.map((link) => (
@@ -262,6 +437,15 @@ export default function ProjectDetail({ project, slug }: Props) {
                     </ProjectExternalLink>
                   ))}
                 </div>
+                {project.sourceNote && (
+                  <p
+                    className={`text-xs leading-relaxed text-muted ${
+                      links.length > 0 ? "mt-4 border-t border-[var(--color-border)] pt-3" : ""
+                    }`}
+                  >
+                    🔒 {project.sourceNote}
+                  </p>
+                )}
               </motion.div>
             )}
           </aside>

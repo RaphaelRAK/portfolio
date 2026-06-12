@@ -23,6 +23,11 @@ const faqItems = [
       "React Native et Next.js côté front, NestJS et TypeScript côté back, PostgreSQL via Supabase, Docker/Scaleway pour l'infra, plus Stripe, Firebase et n8n selon les besoins.",
   },
   {
+    question: "Où peut-on voir votre code ?",
+    answer:
+      "L'essentiel de mon travail (plüm, Revo) est en dépôt privé — code propriétaire d'entreprise ou produit commercial. Je présente volontiers l'architecture et des extraits de code en entretien, et mon profil GitLab est ouvert pour échanger.",
+  },
+  {
     question: "Êtes-vous disponible pour de nouvelles opportunités ?",
     answer:
       "Actuellement en CDI chez plüm. Je reste ouvert aux échanges pour des projets formateurs, collaborations ou opportunités futures — n'hésitez pas à me contacter.",

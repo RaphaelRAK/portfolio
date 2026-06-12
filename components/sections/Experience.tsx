@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Reveal, RevealWords } from "@/components/ui/Reveal";
 import { TechTag } from "@/components/ui/TechTag";
@@ -16,6 +17,8 @@ type TimelineItem = {
   stack?: string[];
   kind: ItemKind;
   tag: string;
+  /** Slug vers la page projet détaillée */
+  slug?: string;
 };
 
 type TimelineRow = {
@@ -71,6 +74,7 @@ const timelineRows: TimelineRow[] = [
         stack: ["Python", "Dash", "Bash", "PostgreSQL"],
         kind: "dev",
         tag: "Recherche",
+        slug: "ter-suivi-etudiants",
       },
     ],
     right: [
@@ -101,6 +105,7 @@ const timelineRows: TimelineRow[] = [
         stack: ["JavaScript", "WebXR"],
         kind: "dev",
         tag: "Recherche",
+        slug: "maido-vr",
       },
     ],
     right: [
@@ -131,6 +136,7 @@ const timelineRows: TimelineRow[] = [
         stack: ["Laravel", "PHP", "MySQL"],
         kind: "dev",
         tag: "Stage",
+        slug: "stage-esige",
       },
     ],
     right: [
@@ -211,6 +217,16 @@ function ItemCard({ item, align = "left" }: { item: TimelineItem; align?: "left"
           {item.stack.map((tech) => (
             <TechTag key={tech} name={tech} variant="compact" />
           ))}
+        </div>
+      )}
+      {item.slug && (
+        <div className={`mt-4 ${align === "right" ? "lg:text-right" : ""}`}>
+          <Link
+            href={`/projects/${item.slug}/`}
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-primary)] transition-all duration-200 hover:gap-2.5"
+          >
+            Étude de cas →
+          </Link>
         </div>
       )}
     </div>

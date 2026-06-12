@@ -7,9 +7,9 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 const steps = [
   {
     number: "01",
-    title: "Comprendre",
+    title: "Cadrer",
     description:
-      "Analyse du besoin, du contexte métier et des contraintes techniques avant d'écrire la première ligne.",
+      "Tickets découpés et priorisés sur GitLab, maquettes quand l'UI le mérite, et une definition of done écrite avant la première ligne de code.",
     accent: "rgba(46, 91, 255, 0.1)",
     dot: "linear-gradient(to top, #2e5bff, #4e74ff)",
     dotShadow: "0 8px 18px -8px rgba(46, 91, 255, 0.6)",
@@ -18,16 +18,16 @@ const steps = [
     number: "02",
     title: "Construire",
     description:
-      "Développement itératif — mobile React Native, web Next.js, API NestJS — avec des livrables testables.",
+      "Branches courtes, merge requests relues, TypeScript strict de bout en bout — un même langage du mobile React Native à l'API NestJS.",
     accent: "rgba(249, 115, 22, 0.1)",
     dot: "linear-gradient(to top, #ea7a0c, #fb923c)",
     dotShadow: "0 8px 18px -8px rgba(249, 115, 22, 0.6)",
   },
   {
     number: "03",
-    title: "Déployer",
+    title: "Livrer & surveiller",
     description:
-      "Mise en production, monitoring, Docker, CI — des produits qui tournent, pas des démos.",
+      "Docker Compose sur serveur dédié, Nginx, suivi des erreurs en prod et hotfix rapide. Une feature n'est terminée que quand elle tourne chez les utilisateurs.",
     accent: "rgba(16, 185, 129, 0.1)",
     dot: "linear-gradient(to top, #0d8a60, #34d399)",
     dotShadow: "0 8px 18px -8px rgba(16, 185, 129, 0.6)",

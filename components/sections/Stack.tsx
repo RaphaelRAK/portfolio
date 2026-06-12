@@ -27,7 +27,7 @@ const techs: Tech[] = [
   { name: "TypeScript", level: "Expert", note: "Mon langage du quotidien, front & back", category: "Frontend" },
   { name: "Tailwind CSS", level: "Expert", note: "Design systems rapides et maintenables", category: "Frontend" },
   { name: "NestJS", level: "Expert", note: "API microservices de plüm", category: "Backend" },
-  { name: "PostgreSQL", level: "Intermédiaire", note: "Base principale de tous mes projets", category: "Backend" },
+  { name: "PostgreSQL", level: "Avancé", note: "Fonctions SQL complexes, triggers, migrations critiques en prod", category: "Backend" },
   { name: "Supabase", level: "Expert", note: "Auth, base et storage chez plüm & Revo", category: "Backend" },
   { name: "Python", level: "Intermédiaire", note: "Dashboards Dash au LIM", category: "Backend" },
   { name: "Docker", level: "Avancé", note: "Déploiements Compose sur serveur dédié", category: "DevOps" },

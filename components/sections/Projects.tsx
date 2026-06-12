@@ -29,8 +29,8 @@ export default function Projects() {
             </h2>
           </div>
           <p className="text-muted text-sm max-w-sm leading-relaxed">
-            Du professionnel au personnel — captures réelles, pas des maquettes vides.
-            Cliquez pour le détail.
+            Des produits que je construis et maintiens en production —
+            défis techniques, architecture et résultats en détail.
           </p>
         </motion.div>
 
@@ -53,11 +53,13 @@ export default function Projects() {
                   category={project.category}
                   description={project.shortDesc}
                   period={project.period}
-                  image={project.images?.[0]}
+                  images={project.images}
+                  mediaType={project.mediaType}
                   previewNotice={project.previewNotice}
                   accent={project.accent}
                   featured={featured}
                   index={index}
+                  cover={project.cover}
                 />
               </Link>
             );

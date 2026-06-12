@@ -16,7 +16,7 @@ const chipLogos = ["React Native", "Next.js", "NestJS"];
 const stats = [
   { value: "2", label: "apps en production" },
   { value: "M2", label: "Mention Bien — 2025" },
-  { value: "CDI", label: "plüm · sept. 2024" },
+  { value: "plüm", label: "alternance 2024 → CDI 2025" },
 ];
 
 const reveal = (delay = 0) => ({
